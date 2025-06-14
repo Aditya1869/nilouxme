@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /* Base setup */
 body {
   background-color: #000;
@@ -776,5 +776,4 @@ document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
       }, 5000);
     });
   });
-});
->>>>>>> 257e257 (Initial commit for website)
+}); 
