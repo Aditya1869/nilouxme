@@ -162,14 +162,18 @@ document.querySelectorAll('.zoomable').forEach(img => {
     overlay.appendChild(caption);
     document.body.appendChild(overlay);
 
-    overlay.addEventListener('click', () => overlay.remove());
+   overlay.addEventListener('click', () => {
+  overlay.classList.add('zoom-out');
+  overlay.addEventListener('animationend', () => overlay.remove(), { once: true });
+});
 
-    document.addEventListener('keydown', function escListener(e) {
-      if (e.key === "Escape") {
-        overlay.remove();
-        document.removeEventListener('keydown', escListener);
-      }
-    });
+document.addEventListener('keydown', function escListener(e) {
+  if (e.key === "Escape") {
+    overlay.classList.add('zoom-out');
+    overlay.addEventListener('animationend', () => overlay.remove(), { once: true });
+    document.removeEventListener('keydown', escListener);
+  }
+});
   });
 });
 
