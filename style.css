@@ -392,13 +392,10 @@ body::before {
 hr { display: none; }
 section { box-shadow: none; border: none; }
 .auto-scroll-gallery {
-  height: 80;
-  width: auto%;
+  width: 100vw;
   overflow: hidden;
   padding: 2rem 0;
-   aspect-ratio: 1 / 1;
   display: flex;
-  object-fit: cover;
   flex-direction: column;
   gap: 2rem;
 }
