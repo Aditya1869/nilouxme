@@ -177,29 +177,49 @@ document.addEventListener('mousemove', e => {
   glow.style.left = `${e.clientX}px`;
   glow.style.top = `${e.clientY}px`;
 });
-window.addEventListener('load', () => {
-  const loading = document.getElementById('loading-screen');
-  if (loading) {
-    loading.classList.add('hidden');
-    setTimeout(() => loading.remove(), 800);
-  }
-  // ...rest of your code
-});
-window.addEventListener('DOMContentLoaded', () => {
-  const first = document.getElementById('first-text');
-  const second = document.getElementById('second-text');
-  first.style.opacity = '1';
-
  window.addEventListener('DOMContentLoaded', () => {
   const loadingScreen = document.getElementById('loading-screen');
   const loadingVideo = document.getElementById('loading-video');
+  const firstText = document.getElementById('first-text');
+  const secondText = document.getElementById('second-text');
+
+  // Helper to show/hide texts in sequence
+  function animateTexts(duration) {
+    firstText.style.opacity = 1;
+    setTimeout(() => {
+      firstText.style.opacity = 0;
+      setTimeout(() => {
+        firstText.style.display = 'none';
+        secondText.style.display = 'inline-block';
+        secondText.style.opacity = 1;
+      }, 700);
+    }, Math.max(1200, duration * 0.5 * 1000)); // Show first text for half the video or at least 1.2s
+
+    // Hide second text before the video ends
+    setTimeout(() => {
+      secondText.style.opacity = 0;
+    }, duration * 1000 - 700);
+  }
 
   if (loadingVideo && loadingScreen) {
     loadingVideo.addEventListener('loadedmetadata', () => {
+      // Animate text sequence for the video duration
+      animateTexts(loadingVideo.duration);
+
+      // Remove loading screen when the video is done
+      loadingVideo.addEventListener('ended', () => {
+        loadingScreen.classList.add('hidden');
+        setTimeout(() => loadingScreen.remove(), 700);
+      });
+
+      // If your video is set to loop, auto-hide after one playthrough
       setTimeout(() => {
         loadingScreen.classList.add('hidden');
-        setTimeout(() => loadingScreen.remove(), 800);
-      }, loadingVideo.duration * 1000); // duration in ms
+        setTimeout(() => loadingScreen.remove(), 700);
+      }, loadingVideo.duration * 1000);
+    });
+  }
+});
     });
   }
 });
