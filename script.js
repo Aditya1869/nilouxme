@@ -10,48 +10,66 @@ function handleScrollFade() {
 window.addEventListener('scroll', handleScrollFade);
 window.addEventListener('load', handleScrollFade);
 
-// 🎧 Music Toggle
+// 🎧 Music Toggle + Visualizer
 const music = document.getElementById('bg-music');
 const musicToggle = document.getElementById('music-toggle');
+const musicLabel = document.getElementById('music-label');
+const visualizer = document.getElementById('music-visualizer');
+
 let isPlaying = false;
+let audioCtx, analyser, source, animationId;
 
-function fadeIn(audio, duration = 1000) {
-  audio.volume = 0;
-  audio.play().catch(e => console.warn("Autoplay blocked:", e));
-  let vol = 0;
-  const step = 50;
-  const interval = setInterval(() => {
-    vol += step / duration;
-    if (vol >= 1) {
-      audio.volume = 1;
-      clearInterval(interval);
-    } else {
-      audio.volume = vol;
+function startVisualizer() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioCtx.createAnalyser();
+    source = audioCtx.createMediaElementSource(music);
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+  }
+  visualizer.style.display = 'inline-block';
+
+  function draw() {
+    const ctx = visualizer.getContext('2d');
+    ctx.clearRect(0, 0, visualizer.width, visualizer.height);
+    const data = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(data);
+
+    const barWidth = 4;
+    for (let i = 0; i < 8; i++) {
+      const value = data[i] / 255;
+      const barHeight = value * visualizer.height;
+      ctx.fillStyle = `rgba(0,200,255,0.8)`;
+      ctx.fillRect(i * barWidth + 2, visualizer.height - barHeight, barWidth - 1, barHeight);
     }
-  }, step);
+    animationId = requestAnimationFrame(draw);
+  }
+  draw();
 }
 
-function fadeOut(audio, duration = 1000) {
-  let vol = audio.volume;
-  const step = 50;
-  const interval = setInterval(() => {
-    vol -= step / duration;
-    if (vol <= 0) {
-      audio.volume = 0;
-      audio.pause();
-      clearInterval(interval);
-    } else {
-      audio.volume = vol;
-    }
-  }, step);
+function stopVisualizer() {
+  visualizer.style.display = 'none';
+  if (animationId) cancelAnimationFrame(animationId);
+  const ctx = visualizer.getContext('2d');
+  ctx.clearRect(0, 0, visualizer.width, visualizer.height);
 }
 
-musicToggle?.addEventListener('click', () => {
-  if (!music) return console.error("Audio element not found!");
-  isPlaying ? fadeOut(music) : fadeIn(music);
-  musicToggle.textContent = `♫ Music: ${isPlaying ? 'Off' : 'On'}`;
+musicToggle.addEventListener('click', () => {
+  if (!music) return;
+  if (!isPlaying) {
+    music.play();
+    startVisualizer();
+    musicLabel.textContent = '♫ Music: On';
+  } else {
+    music.pause();
+    stopVisualizer();
+    musicLabel.textContent = '♫ Music: Off';
+  }
   isPlaying = !isPlaying;
 });
+
+music.addEventListener('pause', stopVisualizer);
+music.addEventListener('ended', stopVisualizer);
 
 // 🎬 Page Load Effects
 window.addEventListener('load', () => {
@@ -159,8 +177,6 @@ document.querySelectorAll('.zoomable').forEach(img => {
     });
   });
 });
-
- 
 
 // 💫 Cursor Glow
 const glow = document.createElement('div');
