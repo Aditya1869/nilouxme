@@ -97,6 +97,7 @@ if (fireflyContainer) {
   }
 }
 
+ 
 // 🌠 Parallax on Scroll
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
