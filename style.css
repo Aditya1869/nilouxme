@@ -392,6 +392,17 @@ body::before {
     max-width: 95vw;
   }
 }
+.our-gallery, .the-floating-gallery {
+  margin-top: 3rem;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+hr { display: none; }
+section { box-shadow: none; border: none; }
 .auto-scroll-gallery {
   width: 100vw;
   overflow: hidden;
@@ -429,33 +440,6 @@ body::before {
 .min-w-\[300px\], .min-w-\[200px\] {
   position: relative;
   width: 250px; /* or your preferred width */
-@media (max-width: 900px) {
-  .gallery-item {
-    min-width: 60vw;
-    max-width: 80vw;
-    min-height: 130px;
-    font-size: 1rem;
-    padding: 10px 5px;
-  }
-}
-
-@media (max-width: 700px) {
-  .gallery-item {
-    min-width: 85vw;
-    max-width: 97vw;
-    min-height: 110px;
-    font-size: 0.98rem;
-    padding: 7px 2vw;
-  }
-  .gallery-item img {
-    min-height: 70px;
-    max-height: 110px;
-  }
-}
-/* Shimmer animation */
-@keyframes shimmer {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
 }
 
 #loading-screen {
