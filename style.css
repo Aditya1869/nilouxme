@@ -480,15 +480,15 @@ section { box-shadow: none; border: none; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
     width: 100vw;
     box-sizing: border-box;
     padding: 0 2vw;
+    gap: 1.5rem;
   }
   .the-floating-gallery .rounded-xl {
     width: 95vw;
-    min-width: 0;
     max-width: 100%;
+    min-width: 0;
     margin: 0 auto;
     box-sizing: border-box;
   }
@@ -502,5 +502,13 @@ section { box-shadow: none; border: none; }
   .the-floating-gallery .card-title {
     word-break: break-word;
     overflow-wrap: anywhere;
+  }
+  .min-w-\[300px\], .min-w-\[200px\] {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
   }
 }
