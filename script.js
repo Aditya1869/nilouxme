@@ -7,6 +7,15 @@ function handleScrollFade() {
     }
   });
 }
+let lastTouch = 0;
+document.addEventListener('touchstart', function(e) {
+  const now = new Date().getTime();
+  if (now - lastTouch <= 300) {
+    e.preventDefault(); // Prevent double-tap
+  }
+  lastTouch = now;
+}, { passive: false });
+
 window.addEventListener('scroll', handleScrollFade);
 window.addEventListener('load', handleScrollFade);
 
