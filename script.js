@@ -275,3 +275,61 @@ if (gallery) {
   window.addEventListener('touchend',     dragEnd);
   window.addEventListener('touchcancel',  dragEnd);
 }
+function setupAutoScroll(rowSelector, direction = 1, speed = 1) {
+  const row = document.querySelector(rowSelector);
+  let isDragging = false, startX = 0, scrollStart = 0;
+
+  // Auto-scroll logic
+  function autoScroll() {
+    if (!isDragging) {
+      row.scrollLeft += speed * direction;
+      // Loop if at the end
+      if (direction > 0 && row.scrollLeft + row.clientWidth >= row.scrollWidth) {
+        row.scrollLeft = 0;
+      } else if (direction < 0 && row.scrollLeft <= 0) {
+        row.scrollLeft = row.scrollWidth - row.clientWidth;
+      }
+    }
+    requestAnimationFrame(autoScroll);
+  }
+  autoScroll();
+
+  // Drag logic (mouse)
+  row.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    row.classList.add('dragging');
+    startX = e.pageX;
+    scrollStart = row.scrollLeft;
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const dx = e.pageX - startX;
+    row.scrollLeft = scrollStart - dx;
+  });
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    row.classList.remove('dragging');
+  });
+
+  // Drag logic (touch)
+  row.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].pageX;
+    scrollStart = row.scrollLeft;
+  }, {passive: true});
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const dx = e.touches[0].pageX - startX;
+    row.scrollLeft = scrollStart - dx;
+  }, {passive: true});
+  window.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Top row: scroll left to right
+  setupAutoScroll('.left-scroll', 1, 1);
+  // Bottom row: scroll right to left
+  setupAutoScroll('.right-scroll', -1, 1);
+});
