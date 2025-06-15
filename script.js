@@ -255,3 +255,55 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+hr { display: none; }
+section { box-shadow: none; border: none; }
+const gallery = document.querySelector('.auto-scroll-gallery');
+let isDragging = false;
+let startX, scrollStart;
+let autoScroll = true;
+
+// 1) Auto‑scroll loop
+function autoScrollLoop() {
+  if (autoScroll && !isDragging) {
+    gallery.scrollLeft += 1;  // tweak speed here
+  }
+  requestAnimationFrame(autoScrollLoop);
+}
+autoScrollLoop();
+
+// 2) Handle drag start
+function dragStart(e) {
+  isDragging = true;
+  autoScroll = false;
+  startX = e.type.includes('mouse') 
+    ? e.pageX 
+    : e.touches[0].pageX;
+  scrollStart = gallery.scrollLeft;
+}
+
+// 3) Handle dragging
+function dragging(e) {
+  if (!isDragging) return;
+  const x = e.type.includes('mouse') 
+    ? e.pageX 
+    : e.touches[0].pageX;
+  const delta = startX - x;
+  gallery.scrollLeft = scrollStart + delta;
+}
+
+// 4) Handle drag end
+function dragEnd() {
+  isDragging = false;
+  autoScroll = true;  // resume auto‑scroll immediately
+}
+
+// 5) Attach events
+gallery.addEventListener('mousedown',   dragStart);
+gallery.addEventListener('touchstart',  dragStart, { passive: true });
+
+window.addEventListener('mousemove',    dragging);
+window.addEventListener('touchmove',    dragging,   { passive: true });
+
+window.addEventListener('mouseup',      dragEnd);
+window.addEventListener('touchend',     dragEnd);
+window.addEventListener('touchcancel',  dragEnd);
