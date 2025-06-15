@@ -392,10 +392,33 @@ body::before {
     max-width: 95vw;
   }
 }
-.our-gallery, .the-floating-gallery {
-  margin-top: 3rem;
+.floating-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns */
+  gap: 24px;
+  max-width: 600px; /* adjust as needed */
+  margin: 0 auto;
 }
 
+.floating-gallery .gallery-item {
+  background: rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  transition: transform 0.2s;
+}
+
+.floating-gallery .gallery-item:hover {
+  transform: scale(1.04);
+}
+
+.floating-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 7px;
+}
 /* Shimmer animation */
 @keyframes shimmer {
   0% { background-position: 0% 0%; }
