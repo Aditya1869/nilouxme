@@ -1,11 +1,10 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" >
 <head>
- <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
+  
   <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   <title>Aadi's Dreamscape</title>
   
   <!-- Tailwind CSS CDN -->
@@ -17,13 +16,15 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="bg-black text-white font-['Playfair_Display'] overflow-x-hidden">
-<video id="loading-video" autoplay muted playsinline>
-  <source src="assets/loading.mp4" type="video/mp4">
-</video>
+<div id="loading-screen">
+  <video id="loading-video" autoplay>
+    <source src="assets/loading.mp4" type="video/mp4">
+  </video>
   <div class="loading-text">
     <span id="first-text">Oh! you are calling for me?</span>
     <span id="second-text" style="display:none;">Coming...</span>
   </div>
+</div>
   <!-- Hero Section -->
   <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 z-10">
      <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-md animate-fade-in">
@@ -142,27 +143,27 @@
       </div>
       <!-- Repeat for seamless scroll -->
       <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery6.jpg" loading="lazy" alt="Gallery 1" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <img src="assets/gallery1.jpg" loading="lazy" alt="Gallery 1" class="zoomable rounded-md mb-2 transition-transform duration-500" />
         <h3 class="text-lg font-medium">Nili loulou</h3>
       </div>
       <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery7.jpg" loading="lazy" alt="Gallery 2" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <img src="assets/gallery2.jpg" loading="lazy" alt="Gallery 2" class="zoomable rounded-md mb-2 transition-transform duration-500" />
         <h3 class="text-lg font-medium">Fairy</h3>
       </div>
       <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery8w.jpg" loading="lazy" alt="Gallery 3" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <img src="assets/gallery3.jpg" loading="lazy" alt="Gallery 3" class="zoomable rounded-md mb-2 transition-transform duration-500" />
         <h3 class="text-lg font-medium">My everything</h3>
       </div>
       <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery8.jpg" loading="lazy" alt="Gallery 4" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <img src="assets/gallery4.jpg" loading="lazy" alt="Gallery 4" class="zoomable rounded-md mb-2 transition-transform duration-500" />
         <h3 class="text-lg font-medium">Dreamscape</h3>
       </div>
       <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery10.jpg" loading="lazy" alt="Gallery 5" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <img src="assets/gallery5.jpg" loading="lazy" alt="Gallery 5" class="zoomable rounded-md mb-2 transition-transform duration-500" />
         <h3 class="text-lg font-medium">Aurora</h3>
       </div>
       <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery11.jpg" loading="lazy" alt="Gallery 6" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <img src="assets/gallery6.jpg" loading="lazy" alt="Gallery 6" class="zoomable rounded-md mb-2 transition-transform duration-500" />
         <h3 class="text-lg font-medium">Moonlit</h3>
       </div>
     </div>
@@ -198,7 +199,7 @@
         <h3 class="text-lg font-medium">Serenade</h3>
       </div>
       <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery8w.jpg" loading="lazy" alt="Gallery 8" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <img src="assets/gallery8.jpg" loading="lazy" alt="Gallery 8" class="zoomable rounded-md mb-2 transition-transform duration-500" />
         <h3 class="text-lg font-medium">Twilight</h3>
       </div>
       <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
@@ -220,6 +221,7 @@
     </div>
   </div>
 </section>
+
 
   <!-- Footer -->
   <footer class="py-6 text-center text-white/60 text-sm select-none">
