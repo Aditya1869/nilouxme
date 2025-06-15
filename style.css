@@ -381,6 +381,8 @@ section { box-shadow: none; border: none; }
   overflow: hidden;
   padding: 2rem 0;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   flex-direction: column;
   gap: 2rem;
 }
@@ -397,12 +399,19 @@ section { box-shadow: none; border: none; }
 }
 .auto-scroll-gallery img {
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   border-radius: 1rem;
   display: block;
 }
 
+/* 🌟 Mobile Fix: Make layout tighter and avoid crop */
+@media (max-width: 768px) {
+  .gallery .card {
+    flex: 0 1 45%;
+    max-width: 45%;
+  }
+}
 @keyframes scrollGalleryLeft {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
