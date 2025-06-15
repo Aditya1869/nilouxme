@@ -53,10 +53,16 @@ musicToggle?.addEventListener('click', () => {
   isPlaying = !isPlaying;
 });
 
-// 🎬 Page Load Effects
+// 🎬 Page Load Effects & Loading Screen
 window.addEventListener('load', () => {
-  document.getElementById('loading-screen')?.classList.add('hidden');
+  // Hide loading screen with fade out
+  const loading = document.getElementById('loading-screen');
+  if (loading) {
+    loading.classList.add('hidden');
+    setTimeout(() => loading.remove(), 800); // Match your CSS transition
+  }
 
+  // Video and background image transition
   const video = document.getElementById('bg-video');
   const bgImage = document.getElementById('bg-image');
   setTimeout(() => {
@@ -65,12 +71,14 @@ window.addEventListener('load', () => {
     video?.play().catch(e => console.warn("Video autoplay failed:", e));
   }, 500);
 
+  // Page transition overlay
   const transition = document.getElementById('page-transition');
   if (transition) {
     transition.style.opacity = '0';
     setTimeout(() => transition.remove(), 1000);
   }
 
+  // Whisper fade-in
   const whisper = document.getElementById('nilou-whisper');
   setTimeout(() => whisper?.classList.add('opacity-100'), 3000);
 });
@@ -160,30 +168,9 @@ document.querySelectorAll('.zoomable').forEach(img => {
   });
 });
 
- 
-
 // 💫 Cursor Glow
 const glow = document.createElement('div');
 glow.id = 'cursor-glow';
 document.body.appendChild(glow);
 
-document.addEventListener('mousemove', e => {
-  glow.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
-});
-
-// 👀 Intersection Observer for Scroll Reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
-window.addEventListener('load', () => {
-  document.getElementById('loading-screen')?.classList.add('hidden');
-  setTimeout(() => {
-    document.getElementById('loading-screen')?.remove();
-  }, 4000);
-});
+document.addEventListener('mousemove', e
