@@ -29,7 +29,7 @@ a, .btn, button, .clickable {
   overflow: hidden;
   display: inline-block;
   padding: 0.6rem 1.2rem;
-  background: linear-gradient()(120deg, rgba(0,200,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
+background: linear-gradient(120deg, rgba(0,200,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   color: white;
@@ -42,21 +42,6 @@ a, .btn, button, .clickable {
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  
-@keyframes socialOverlayGlow {
-  0% {
-    transform: rotate(0deg) scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: rotate(10deg) scale(1.08);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(0deg) scale(1);
-    opacity: 0.7;
-  }
-}
 }
 .social-btn:hover, button:hover {
   background: rgba(255, 255, 255, 0.15);
@@ -450,7 +435,9 @@ section { box-shadow: none; border: none; }
   object-fit: cover;
   z-index: 1;
 }
-
+.social-btn:hover, button:hover {
+  animation: socialOverlayGlow 2s ease-in-out infinite;
+}
 .loading-text {
   position: absolute;
   top: 55%;
@@ -496,4 +483,18 @@ section { box-shadow: none; border: none; }
   opacity: 0;
   pointer-events: none;
 }
-
+  
+@keyframes socialOverlayGlow {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(10deg) scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+}
