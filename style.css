@@ -304,12 +304,6 @@ body::before {
 }
 
 /* Zoomable image effect */
-.min-w-\[200px\], .min-w-\[300px\] {
-  position: relative;
-  width: 250px; /* or your preferred width */
-  /* Do NOT add overflow: hidden here */
-}
-
 .zoomable.clicked {
   position: absolute;
   left: 50%;
@@ -409,4 +403,8 @@ section { box-shadow: none; border: none; }
 @keyframes scrollGalleryRight {
   0% { transform: translateX(-50%); }
   100% { transform: translateX(0); }
+}
+.min-w-\[300px\], .min-w-\[200px\] {
+  position: relative;
+  width: 250px; /* or your preferred width */
 }
