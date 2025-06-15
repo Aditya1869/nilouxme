@@ -392,32 +392,43 @@ body::before {
     max-width: 95vw;
   }
 }
-.floating-gallery {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 2 columns */
-  gap: 24px;
-  max-width: 600px; /* adjust as needed */
-  margin: 0 auto;
+.dual-scroll-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 50px auto;
 }
-
-.floating-gallery .gallery-item {
+.scroll-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  cursor: grab;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+  user-select: none;
+  /* Hide scrollbar but allow scrolling */
+  scrollbar-width: none;
+}
+.scroll-row::-webkit-scrollbar { display: none; }
+.gallery-item {
+  min-width: 180px;
   background: rgba(255,255,255,0.07);
   border-radius: 14px;
-  padding: 12px;
+  padding: 10px;
   text-align: center;
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   transition: transform 0.2s;
 }
-
-.floating-gallery .gallery-item:hover {
-  transform: scale(1.04);
-}
-
-.floating-gallery img {
+.gallery-item img {
   width: 100%;
   height: auto;
   border-radius: 8px;
   margin-bottom: 7px;
+}
+.gallery-item:hover {
+  transform: scale(1.04);
 }
 /* Shimmer animation */
 @keyframes shimmer {
