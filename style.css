@@ -423,9 +423,9 @@ section { box-shadow: none; border: none; }
   animation: scrollGalleryRight 50s linear infinite;
 }
 .auto-scroll-gallery img {
-  height: 90px;
+  height: 220px;
   width: auto;
-  max-width: 160px;
+  max-width: 380px;
   border-radius: 1rem;
   object-fit: cover;
 }
