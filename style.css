@@ -306,7 +306,10 @@ body::before {
   from { transform: scale(0.8);}
   to { transform: scale(1);}
 }
-
+.min-w-\[300px\], .min-w-\[200px\] {
+  position: relative;
+  width: 250px; /* or your preferred width */
+}
 /* Zoomable image effect */
 .zoomable.clicked {
   position: absolute;
