@@ -434,6 +434,7 @@ section { box-shadow: none; border: none; }
   position: absolute;
   top: 55%;
   left: 50%;
+  z-index: 2;
   transform: translate(-50%, -50%);
   text-align: center;
 }
