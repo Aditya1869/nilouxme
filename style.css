@@ -10,8 +10,20 @@ body {
 input, textarea, select, button {
   font-size: 16px !important; /* Prevent iOS zoom on tap */
 }
-body {
-  transform: scale(1.1); /* ❌ Avoid this globally */
+img, .zoomable {
+  touch-action: manipulation;
+}
+html, body {
+  touch-action: manipulation; /* disables pinch and double-tap zoom */
+  -ms-touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  overscroll-behavior: none;
+}
+
+a, button {
+  touch-action: manipulation;
 }
 
 /* Hide default scrollbar */
@@ -29,7 +41,7 @@ a, .btn, button, .clickable {
   overflow: hidden;
   display: inline-block;
   padding: 0.6rem 1.2rem;
-  background: linear-gradient()(120deg, rgba(0,200,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
+  background: linear-gradient(120deg, rgba(0,200,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   color: white;
