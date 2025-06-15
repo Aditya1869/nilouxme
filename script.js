@@ -1,189 +1,243 @@
- // 🌟 Scroll Fade Animation
-function handleScrollFade() {
-  const trigger = window.innerHeight * 0.85;
-  document.querySelectorAll('.fade-in-up').forEach(el => {
-    if (el.getBoundingClientRect().top < trigger) {
-      el.classList.add('show');
-    }
-  });
-}
-window.addEventListener('scroll', handleScrollFade);
-window.addEventListener('load', handleScrollFade);
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aadi's Dreamscape</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-// 🎧 Music Toggle
-const music = document.getElementById('bg-music');
-const musicToggle = document.getElementById('music-toggle');
-let isPlaying = false;
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 
-function fadeIn(audio, duration = 1000) {
-  audio.volume = 0;
-  audio.play().catch(e => console.warn("Autoplay blocked:", e));
-  let vol = 0;
-  const step = 50;
-  const interval = setInterval(() => {
-    vol += step / duration;
-    if (vol >= 1) {
-      audio.volume = 1;
-      clearInterval(interval);
-    } else {
-      audio.volume = vol;
-    }
-  }, step);
-}
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-black text-white font-['Playfair_Display'] overflow-x-hidden">
+ 
+<div id="loading-screen" style="position:fixed;inset:0;z-index:99999;background:#000;display:flex;align-items:center;justify-content:center;">
+  <video id="loading-video" autoplay muted loop playsinline style="width:120px;height:120px;border-radius:1rem;">
+    <source src="assets/loading.mp4" type="video/mp4" />
+  </video>
+</div>
+  <!-- Hero Section -->
+  <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 z-10">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to Aadi’s Dreamscape</h1>
+    <p class="text-lg md:text-2xl text-white/70 mb-10">Where emotions become edits.</p>
+    <a href="#starlight" class="px-6 py-3 bg-white/10 backdrop-blur rounded-full border border-white/20 hover:bg-white/20 hover:shadow-xl hover:scale-105 text-white font-semibold">Enter the World</a>
+  </section>
+<video id="bg-video" class="fixed top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000 z-[-5]" autoplay muted loop>
+  <source src="assets/background.mp4" type="video/mp4" />
+</video>
+<img id="bg-image" src="assets/hero-bg.jpg" class="fixed top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 z-[-6]" />
+<div id="page-transition" class="fixed inset-0 bg-black z-50 transition-opacity duration-1000"></div>
+ 
+<!-- Zoom Overlay -->
+<div id="zoom-overlay" style="display:none;">
+  <img id="zoomed-img" src="" alt="Zoomed Image" />
+</div>
 
-function fadeOut(audio, duration = 1000) {
-  let vol = audio.volume;
-  const step = 50;
-  const interval = setInterval(() => {
-    vol -= step / duration;
-    if (vol <= 0) {
-      audio.volume = 0;
-      audio.pause();
-      clearInterval(interval);
-    } else {
-      audio.volume = vol;
-    }
-  }, step);
-}
 
-musicToggle?.addEventListener('click', () => {
-  if (!music) return console.error("Audio element not found!");
-  isPlaying ? fadeOut(music) : fadeIn(music);
-  musicToggle.textContent = `♫ Music: ${isPlaying ? 'Off' : 'On'}`;
-  isPlaying = !isPlaying;
-});
+  <!-- Starlight Box -->
+  <section id="starlight" class="min-h-screen px-8 py-12 flex flex-col items-center justify-center space-y-12">
+    <h2 class="text-3xl font-semibold mb-6">Starlight Box</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
+      <!-- Example Edit Card -->
+      <div class="bg-white/10 backdrop-blur rounded-xl p-6 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/edit1_thumb.jpg" loading="lazy" alt="Edit 1" class="rounded-md mb-4" />
+        <h3 class="text-xl font-medium">Genshin Impact Edit #1</h3>
+        
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-6 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/edit2_thumb.jpg" loading="lazy"  alt="Edit 2" class="rounded-md mb-4" />
+        <h3 class="text-xl font-medium">Genshin Impact Edit #2</h3>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-6 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/edit3_thumb.jpg" loading="lazy" alt="Edit 3" class="rounded-md mb-4" />
+        <h3 class="text-xl font-medium">Genshin Impact Edit #3</h3>
+      </div>
+    </div>
 
-// 🎬 Page Load Effects
-window.addEventListener('load', () => {
-  document.getElementById('loading-screen')?.classList.add('hidden');
-
-  const video = document.getElementById('bg-video');
-  const bgImage = document.getElementById('bg-image');
-  setTimeout(() => {
-    video?.classList.add('opacity-100');
-    bgImage?.classList.add('opacity-0');
-    video?.play().catch(e => console.warn("Video autoplay failed:", e));
-  }, 500);
-
-  const transition = document.getElementById('page-transition');
-  if (transition) {
-    transition.style.opacity = '0';
-    setTimeout(() => transition.remove(), 1000);
-  }
-
-  const whisper = document.getElementById('nilou-whisper');
-  setTimeout(() => whisper?.classList.add('opacity-100'), 3000);
-});
-
-// 🌌 Firefly Generator
-const fireflyContainer = document.getElementById('fireflies');
-if (fireflyContainer) {
-  for (let i = 0; i < 40; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'firefly';
-    dot.style.top = `${Math.random() * 100}vh`;
-    dot.style.left = `${Math.random() * 100}vw`;
-    dot.style.animationDuration = `${8 + Math.random() * 4}s`;
-    dot.style.width = dot.style.height = `${1 + Math.random() * 2}px`;
-    fireflyContainer.appendChild(dot);
-  }
-}
-
-// 🌠 Parallax on Scroll
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  document.body.style.setProperty('--scroll', `${scrollY}px`);
-  document.querySelectorAll('.parallax-gallery, #hero').forEach(el => {
-    el.style.setProperty('--scroll', scrollY);
-  });
-});
-
-// 🧚 Whisper Particle Canvas
-const canvas = document.getElementById('whisperParticles');
-if (canvas) {
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight * 0.3;
-
-  let particles = [];
-  for (let i = 0; i < 50; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 2 + 1,
-      opacity: Math.random(),
-      speedY: Math.random() * 0.5 + 0.2
-    });
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let p of particles) {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
-      ctx.fill();
-      p.y -= p.speedY;
-      if (p.y < 0) p.y = canvas.height;
-    }
-    requestAnimationFrame(draw);
-  }
-
-  draw();
-}
-
-// 🔍 Image Zoom Overlay
-document.querySelectorAll('.zoomable').forEach(img => {
-  img.addEventListener('click', () => {
-    const overlay = document.createElement('div');
-    overlay.className = 'zoom-overlay';
-
-    const zoomedImg = document.createElement('img');
-    zoomedImg.src = img.src;
-
-    const captionText = img.getAttribute('data-caption');
-    const caption = document.createElement('div');
-    caption.className = 'caption';
-    caption.textContent = captionText || '';
-
-    overlay.appendChild(zoomedImg);
-    overlay.appendChild(caption);
-    document.body.appendChild(overlay);
-
-    overlay.addEventListener('click', () => overlay.remove());
-    document.addEventListener('keydown', function escListener(e) {
-      if (e.key === "Escape") {
-        overlay.remove();
-        document.removeEventListener('keydown', escListener);
-      }
-    });
-  });
-});
-
+    <!-- Social Buttons -->
+    <div class="flex space-x-6 mt-10">
+      <a href="https://youtube.com/@nilouxme" aria-label="YouTube" class="social-btn">YouTube</a>
+      <a href="https://instagram.com/2.10_beats" aria-label="Instagram" class="social-btn">Instagram</a>
+      <a href="https://tiktok.com/@2.10_beats" aria-label="TikTok" class="social-btn">TikTok</a>
+      <a href="https://linktr.ee/nilouxme_" aria-label="linktree" class="social-btn">Linktree</a>
+      <a href="https://payhip.com/210beats" aria-label="Payhip" class="social-btn">Payhip</a>
+    </div>
+  </section>
  
 
-// 💫 Cursor Glow
-const glow = document.createElement('div');
-glow.id = 'cursor-glow';
-document.body.appendChild(glow);
+  
+<button id="music-toggle" class="fixed bottom-6 right-6 z-50 bg-white/10 backdrop-blur-md text-white px-4 py-2 rounded-full shadow-md hover:bg-white/20 transition flex items-center gap-2">
+  <canvas id="music-visualizer" width="32" height="16" style="display:none;"></canvas>
+  <span id="music-label">♫ Music: Off</span>
+</button>
 
-document.addEventListener('mousemove', e => {
-  glow.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
-});
+<audio id="bg-music" loop preload="auto">
+  <source src="assets/bg-music.mp3" type="audio/mpeg">
+</audio>
 
-// 👀 Intersection Observer for Scroll Reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    }
-  });
-}, { threshold: 0.1 });
+  <!-- Whisper Panel -->
+  <section id="whisper" class="min-h-screen flex flex-col items-center justify-center px-6 text-center space-y-8">
+  <h2 class="nilou-whisper" class="text-3xl font-semibold mb-6">Nilou’s Whisper</h2>
+  <div id="whisper-text" class="max-w-xl text-xl italic text-white/80 leading-relaxed">
+    <p  class="whisper-line" class="fade-in">“I’m proud of you, Aadi.”</p>
+    <p  class="whisper-line" class="fade-in delay-1">“Rest when you need to. I’ll wait for you.”</p>
+    <p  class="whisper-line" class="fade-in delay-2">“Your edits light up the night.”</p>
+  </div>
+</section>
+<section class="from-aadi-message">
+  <div class="aadi-center-message fade-in-up">
+    <h2>Because You're Here</h2>
+    <p>I’m here… because you’re here.</p>
+    <p>Thank you for walking with me through this journey.</p>
+    <p>You’re not just a viewer, you’re a part of my story.</p>
+    <p>And as long as you’re here… so am I. 💙</p>
+  </div>
+  <div class="nilou-quote">“Aadi smiles more when he knows you're watching.” <br> — Nilou 💙</div>
+</section>
 
-document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
-window.addEventListener('load', () => {
-  document.getElementById('loading-screen')?.classList.add('hidden');
-  setTimeout(() => {
-    document.getElementById('loading-screen')?.remove();
-  }, 4000);
-});
+
+
+    <div>
+<section id="gallery" class="min-h-screen px-8 py-12">
+  <h2 class="text-3xl font-semibold mb-8 text-center">The Floating Gallery</h2>
+  <div class="auto-scroll-gallery">
+    <!-- Top Row: 1-6 -->
+    <div class="scroll-track row1">
+      <!-- Gallery Items 1-6 -->
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery1.jpg" loading="lazy" alt="Gallery 1" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Nilou</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery2.jpg" loading="lazy" alt="Gallery 2" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Fairy</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery3.jpg" loading="lazy" alt="Gallery 3" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Starlight</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery4.jpg" loading="lazy" alt="Gallery 4" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">My world</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery5.jpg" loading="lazy" alt="Gallery 5" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Aurora</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery6.jpg" loading="lazy" alt="Gallery 6" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Moonlight</h3>
+      </div>
+      <!-- Repeat for seamless scroll -->
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery1.jpg" loading="lazy" alt="Gallery 1" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Nili loulou</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery2.jpg" loading="lazy" alt="Gallery 2" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Fairy</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery3.jpg" loading="lazy" alt="Gallery 3" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">My everything</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery4.jpg" loading="lazy" alt="Gallery 4" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Dreamscape</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery5.jpg" loading="lazy" alt="Gallery 5" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Aurora</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery6.jpg" loading="lazy" alt="Gallery 6" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Moonlit</h3>
+      </div>
+    </div>
+    <!-- Bottom Row: 7-12 -->
+    <div class="scroll-track row2">
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery7.jpg" loading="lazy" alt="Gallery 7" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Serenade</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery8.jpg" loading="lazy" alt="Gallery 8" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Twilight</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery9.jpg" loading="lazy" alt="Gallery 9" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Celestial</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery10.jpg" loading="lazy" alt="Gallery 10" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Eclipse</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery11.jpg" loading="lazy" alt="Gallery 11" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Radiance</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery12.jpg" loading="lazy" alt="Gallery 12" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Harmony</h3>
+      </div>
+      <!-- Repeat for seamless scroll -->
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery7.jpg" loading="lazy" alt="Gallery 7" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Serenade</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery8.jpg" loading="lazy" alt="Gallery 8" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Twilight</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery9.jpg" loading="lazy" alt="Gallery 9" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Celestial</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery10.jpg" loading="lazy" alt="Gallery 10" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Eclipse</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery11.jpg" loading="lazy" alt="Gallery 11" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Radiance</h3>
+      </div>
+      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
+        <img src="assets/gallery12.jpg" loading="lazy" alt="Gallery 12" class="zoomable rounded-md mb-2 transition-transform duration-500" />
+        <h3 class="text-lg font-medium">Harmony</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer class="py-6 text-center text-white/60 text-sm select-none">
+    Designed by Aadi, for Nilou 💙
+  </footer>
+
+  <script src="script.js"></script>
+<script>
+const starCount = 100;
+const starfield = document.createElement('div');
+starfield.id = 'starfield';
+document.body.appendChild(starfield);
+
+for (let i = 0; i < starCount; i++) {
+  const star = document.createElement('div');
+  star.classList.add('star');
+  star.style.top = Math.random() * 100 + '%';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+  starfield.appendChild(star);
+}
+</script>
+<canvas id="whisperParticles"></canvas>
+
+</body>
+</html>
+  
