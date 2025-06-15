@@ -334,25 +334,10 @@ body::before {
   from { transform: scale(0.8);}
   to { transform: scale(1);}
 }
-#music-visualizer {
-  position: absolute;
-  left: 50%;
-  bottom: 6px;
-  transform: translateX(-50%);
-  width: 40px;
-   filter: drop-shadow(0 0 6px #00c8ff) drop-shadow(0 0 12px #00c8ff);
-  height: 18px;
-  background: transparent;
-  pointer-events: none;
-  z-index: 2;
-  display: none;
-}
+
 /* Miscellaneous */
 * { scroll-behavior: smooth; }
-#music-toggle {
-  position: relative;
-  overflow: visible;
-}
+#themeBtn, #toggleMusic { font-weight: bold; }
 #cursor-glow {
   position: fixed;
   top: 0; left: 0;
