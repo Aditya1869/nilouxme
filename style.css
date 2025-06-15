@@ -430,21 +430,34 @@ section { box-shadow: none; border: none; }
   width: 250px;
 }
 @media (max-width: 640px) {
-  .rounded-xl, .bg-white\/10, .backdrop-blur, .p-6, .p-4 {
-    padding: 1rem !important;
-    border-radius: 0.75rem !important;
+  .rounded-xl {
+    padding: 0.7rem !important;
+    border-radius: 0.7rem !important;
   }
-  .text-4xl, .text-3xl, .text-2xl, .text-xl, .text-lg {
+  .text-4xl, .text-3xl, .text-2xl, .text-xl, .text-lg, h1, h2, h3 {
     font-size: 1.1rem !important;
   }
+  .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .auto-scroll-gallery img,
+  .rounded-xl img {
+    height: 60px !important;
+    max-width: 100px !important;
+  }
   #music-toggle {
-    right: 1rem !important;
-    bottom: 1rem !important;
+    right: 0.5rem !important;
+    bottom: 0.5rem !important;
     padding: 0.5rem 1rem !important;
     font-size: 1rem !important;
   }
-  .auto-scroll-gallery img {
-    height: 60px !important;
-    max-width: 100px !important;
+  section, .from-aadi-message {
+    padding: 1rem !important;
+  }
+}@media (max-width: 640px) {
+  section, .from-aadi-message {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
   }
 }
