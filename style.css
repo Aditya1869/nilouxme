@@ -116,7 +116,8 @@ a[href^="#"]:hover {
     font-size: 0.9rem;
   }
   #gallery .min-w-\[300px\] {
-    min-width: 250px;
+    position: relative;
+    width: 250px;
   }
 }
 
@@ -308,11 +309,13 @@ body::before {
 
 /* Zoomable image effect */
 .zoomable.clicked {
-  transform: scale(2.5);
-  position: relative;
-  z-index: 50;
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
-  transition: transform 0.4s ease-in-out;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 100;
+  transform: translate(-50%, -50%) scale(2.5);
+  box-shadow: 0 0 40px rgba(255,255,255,0.15);
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s;
 }
 
 /* Miscellaneous */
