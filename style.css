@@ -403,44 +403,57 @@ body::before {
 }
 hr { display: none; }
 section { box-shadow: none; border: none; }
-.auto-scroll-gallery {
-  width: 100vw;
-  overflow: hidden;
-  padding: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+const gallery = document.querySelector('.auto-scroll-gallery');
+let isDragging = false;
+let startX, scrollStart;
+let autoScroll = true;
+
+// 1) Auto‑scroll loop
+function autoScrollLoop() {
+  if (autoScroll && !isDragging) {
+    gallery.scrollLeft += 1;  // tweak speed here
+  }
+  requestAnimationFrame(autoScrollLoop);
 }
-.scroll-track {
-  display: flex;
-  gap: 1.5rem;
-  width: max-content;
+autoScrollLoop();
+
+// 2) Handle drag start
+function dragStart(e) {
+  isDragging = true;
+  autoScroll = false;
+  startX = e.type.includes('mouse') 
+    ? e.pageX 
+    : e.touches[0].pageX;
+  scrollStart = gallery.scrollLeft;
 }
-.row1 {
-  animation: scrollGalleryLeft 40s linear infinite;
+
+// 3) Handle dragging
+function dragging(e) {
+  if (!isDragging) return;
+  const x = e.type.includes('mouse') 
+    ? e.pageX 
+    : e.touches[0].pageX;
+  const delta = startX - x;
+  gallery.scrollLeft = scrollStart + delta;
 }
-.row2 {
-  animation: scrollGalleryRight 50s linear infinite;
+
+// 4) Handle drag end
+function dragEnd() {
+  isDragging = false;
+  autoScroll = true;  // resume auto‑scroll immediately
 }
-.auto-scroll-gallery img {
-  height: 90px;
-  width: auto;
-  max-width: 160px;
-  border-radius: 1rem;
-  object-fit: cover;
-}
-@keyframes scrollGalleryLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes scrollGalleryRight {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
-.min-w-\[300px\], .min-w-\[200px\] {
-  position: relative;
-  width: 250px; /* or your preferred width */
-}
+
+// 5) Attach events
+gallery.addEventListener('mousedown',   dragStart);
+gallery.addEventListener('touchstart',  dragStart, { passive: true });
+
+window.addEventListener('mousemove',    dragging);
+window.addEventListener('touchmove',    dragging,   { passive: true });
+
+window.addEventListener('mouseup',      dragEnd);
+window.addEventListener('touchend',     dragEnd);
+window.addEventListener('touchcancel',  dragEnd);
+
 #loading-screen {
   position: fixed;
   inset: 0;
