@@ -1,4 +1,4 @@
- /* Base setup */
+/* Base setup */
 body {
   background-color: #000;
   color: #fff;
@@ -22,7 +22,7 @@ a, .btn, button, .clickable {
   overflow: hidden;
   display: inline-block;
   padding: 0.6rem 1.2rem;
-  background: rgba(255, 255, 255, 0.08);
+  background: linear-gradient()(120deg, rgba(0,200,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   color: white;
@@ -35,39 +35,22 @@ a, .btn, button, .clickable {
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  
+@keyframes socialOverlayGlow {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(10deg) scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
 }
-
-/* Animated overlay for social buttons */
-.social-btn::before {
-  content: "";
-  position: absolute;
-  top: 0; left: -75%;
-  width: 150%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    rgba(0,200,255,0.18) 0%,
-    rgba(255,255,255,0.22) 50%,
-    rgba(0,200,255,0.18) 100%
-  );
-  filter: blur(8px);
-  opacity: 0.7;
-  z-index: 0;
-  animation: socialShimmer 2.5s linear infinite;
-  pointer-events: none;
 }
-
-@keyframes socialShimmer {
-  0% { left: -75%; }
-  100% { left: 100%; }
-}
-
-.social-btn > * {
-  position: relative;
-  z-index: 1;
-}
-
 .social-btn:hover, button:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: translateY(-4px) scale(1.05);
@@ -335,6 +318,9 @@ body::before {
   to { transform: scale(1);}
 }
 
+/* Zoomable image effect */
+ 
+
 /* Miscellaneous */
 * { scroll-behavior: smooth; }
 #themeBtn, #toggleMusic { font-weight: bold; }
@@ -358,7 +344,7 @@ body::before {
   line-height: 1.8;
 }
 .nilou-quote {
-  position: absolute;
+  position: bottom right;
   bottom: 1rem;
   right: 2rem;
   font-size: 0.75rem;
@@ -427,37 +413,5 @@ section { box-shadow: none; border: none; }
 }
 .min-w-\[300px\], .min-w-\[200px\] {
   position: relative;
-  width: 250px;
-}
-@media (max-width: 640px) {
-  .rounded-xl {
-    padding: 0.7rem !important;
-    border-radius: 0.7rem !important;
-  }
-  .text-4xl, .text-3xl, .text-2xl, .text-xl, .text-lg, h1, h2, h3 {
-    font-size: 1.1rem !important;
-  }
-  .grid {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
-  }
-  .auto-scroll-gallery img,
-  .rounded-xl img {
-    height: 60px !important;
-    max-width: 100px !important;
-  }
-  #music-toggle {
-    right: 0.5rem !important;
-    bottom: 0.5rem !important;
-    padding: 0.5rem 1rem !important;
-    font-size: 1rem !important;
-  }
-  section, .from-aadi-message {
-    padding: 1rem !important;
-  }
-}@media (max-width: 640px) {
-  section, .from-aadi-message {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
-  }
+  width: 250px; /* or your preferred width */
 }
