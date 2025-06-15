@@ -389,6 +389,7 @@ section { box-shadow: none; border: none; }
   width: 100%;
   overflow: hidden;
   padding: 2rem 0;
+   aspect-ratio: 1 / 1;
   display: flex;
   object-fit: cover;
   flex-direction: column;
