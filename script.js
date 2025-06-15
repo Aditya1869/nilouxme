@@ -1,4 +1,4 @@
-// ✨ Text Animation on Scroll
+// 🌟 Scroll Fade Animation
 function handleScrollFade() {
   const trigger = window.innerHeight * 0.85;
   document.querySelectorAll('.fade-in-up').forEach(el => {
@@ -46,26 +46,17 @@ function fadeOut(audio, duration = 1000) {
   }, step);
 }
 
-if (musicToggle) {
-  musicToggle.addEventListener('click', () => {
-    if (!music) {
-      console.error("Audio element not found!");
-      return;
-    }
-    if (isPlaying) {
-      fadeOut(music);
-      musicToggle.textContent = '♫ Music: Off';
-    } else {
-      fadeIn(music);
-      musicToggle.textContent = '♫ Music: On';
-    }
-    isPlaying = !isPlaying;
-  });
-}
+musicToggle?.addEventListener('click', () => {
+  if (!music) return console.error("Audio element not found!");
+  isPlaying ? fadeOut(music) : fadeIn(music);
+  musicToggle.textContent = `♫ Music: ${isPlaying ? 'Off' : 'On'}`;
+  isPlaying = !isPlaying;
+});
 
 // 🎬 Page Load Effects
 window.addEventListener('load', () => {
   document.getElementById('loading-screen')?.classList.add('hidden');
+
   const video = document.getElementById('bg-video');
   const bgImage = document.getElementById('bg-image');
   setTimeout(() => {
@@ -101,17 +92,13 @@ if (fireflyContainer) {
 // 🌠 Parallax on Scroll
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
-  document.body.style.setProperty('--scroll', scrollY + 'px');
-  const hero = document.getElementById('hero');
-  if (hero) {
-    hero.style.setProperty('--scroll', scrollY);
-  }
-  document.querySelectorAll('.parallax-gallery').forEach(el => {
+  document.body.style.setProperty('--scroll', `${scrollY}px`);
+  document.querySelectorAll('.parallax-gallery, #hero').forEach(el => {
     el.style.setProperty('--scroll', scrollY);
   });
 });
 
-// 🫧 Whisper Particles
+// 🧚 Whisper Particle Canvas
 const canvas = document.getElementById('whisperParticles');
 if (canvas) {
   const ctx = canvas.getContext('2d');
@@ -141,10 +128,11 @@ if (canvas) {
     }
     requestAnimationFrame(draw);
   }
+
   draw();
 }
 
-// 🖼️ Zoomable Images
+// 🔍 Image Zoom Overlay
 document.querySelectorAll('.zoomable').forEach(img => {
   img.addEventListener('click', () => {
     const overlay = document.createElement('div');
@@ -162,22 +150,29 @@ document.querySelectorAll('.zoomable').forEach(img => {
     overlay.appendChild(caption);
     document.body.appendChild(overlay);
 
-   overlay.addEventListener('click', () => {
-  overlay.classList.add('zoom-out');
-  overlay.addEventListener('animationend', () => overlay.remove(), { once: true });
-});
-
-document.addEventListener('keydown', function escListener(e) {
-  if (e.key === "Escape") {
-    overlay.classList.add('zoom-out');
-    overlay.addEventListener('animationend', () => overlay.remove(), { once: true });
-    document.removeEventListener('keydown', escListener);
-  }
-});
+    overlay.addEventListener('click', () => overlay.remove());
+    document.addEventListener('keydown', function escListener(e) {
+      if (e.key === "Escape") {
+        overlay.remove();
+        document.removeEventListener('keydown', escListener);
+      }
+    });
   });
 });
 
-// ✨ Cursor Glow
+// ✨ Highlight Clicked Image Temporarily
+document.addEventListener("DOMContentLoaded", () => {
+  const zoomables = document.querySelectorAll('.zoomable');
+  zoomables.forEach(img => {
+    img.addEventListener('click', () => {
+      zoomables.forEach(other => other !== img && other.classList.remove('clicked'));
+      img.classList.add('clicked');
+      setTimeout(() => img.classList.remove('clicked'), 5000);
+    });
+  });
+});
+
+// 💫 Cursor Glow
 const glow = document.createElement('div');
 glow.id = 'cursor-glow';
 document.body.appendChild(glow);
@@ -186,7 +181,7 @@ document.addEventListener('mousemove', e => {
   glow.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
 });
 
-// ✨ Intersection Observer for fade-in-up
+// 👀 Intersection Observer for Scroll Reveal
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -196,19 +191,3 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
-
-// 🖼️ Zoomable click effect (single zoom at a time)
-document.addEventListener("DOMContentLoaded", () => {
-  const zoomables = document.querySelectorAll('.zoomable');
-  zoomables.forEach(img => {
-    img.addEventListener('click', () => {
-      zoomables.forEach(other => {
-        if (other !== img) other.classList.remove('clicked');
-      });
-      img.classList.add('clicked');
-      setTimeout(() => {
-        img.classList.remove('clicked');
-      }, 5000);
-    });
-  });
-});
