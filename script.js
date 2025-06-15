@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     img.addEventListener('click', () => {
       zoomables.forEach(other => other !== img && other.classList.remove('clicked'));
       img.classList.add('clicked');
-      setTimeout(() => img.classList.remove('clicked'), 5000);
+      setTimeout(() => img.classList.remove('clicked'), 3000);
     });
   });
 });
