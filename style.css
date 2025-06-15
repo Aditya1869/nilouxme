@@ -353,18 +353,11 @@ body::before {
   color: #d0e0ff;
 }
 .from-aadi-message {
-  margin: 0rem 0;
-  padding: 2.5rem 2.5rem;
-  background: rgba(59, 59, 59, 0.567);
-  backdrop-filter: blur(10px);
-  border-radius: 1rem;
-  text-align: center;
-  color: #e6f0ff;
-  font-style: normal;
-  font-size: 1.1rem;
-  line-height: 2;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.25), 0 0 20px rgba(173, 216, 230, 0.2), 0 0 40px rgba(173, 216, 230, 0.1) inset;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
 }
 .our-gallery, .the-floating-gallery {
   margin-top: 3rem;
@@ -428,7 +421,7 @@ section { box-shadow: none; border: none; }
 
 #loading-screen video {
   position: absolute;
-  filter: blur(2px);
+  filter: blur(6px);
   inset: 0;
   width: 100vw;
   height: 100vh;
