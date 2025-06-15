@@ -177,69 +177,31 @@ document.addEventListener('mousemove', e => {
   glow.style.left = `${e.clientX}px`;
   glow.style.top = `${e.clientY}px`;
 });
- window.addEventListener('DOMContentLoaded', () => {
-  const loadingScreen = document.getElementById('loading-screen');
-  const loadingVideo = document.getElementById('loading-video');
-  const firstText = document.getElementById('first-text');
-  const secondText = document.getElementById('second-text');
 
-  // Helper to show/hide texts in sequence
-  function animateTexts(duration) {
-    firstText.style.opacity = 1;
-    setTimeout(() => {
-      firstText.style.opacity = 0;
-      setTimeout(() => {
-        firstText.style.display = 'none';
-        secondText.style.display = 'inline-block';
-        secondText.style.opacity = 1;
-      }, 700);
-    }, Math.max(1200, duration * 0.5 * 1000)); // Show first text for half the video or at least 1.2s
-
-    // Hide second text before the video ends
-    setTimeout(() => {
-      secondText.style.opacity = 0;
-    }, duration * 1000 - 700);
-  }
-
-  if (loadingVideo && loadingScreen) {
-    loadingVideo.addEventListener('loadedmetadata', () => {
-      // Animate text sequence for the video duration
-      animateTexts(loadingVideo.duration);
-
-      // Remove loading screen when the video is done
-      loadingVideo.addEventListener('ended', () => {
-        loadingScreen.classList.add('hidden');
-        setTimeout(() => loadingScreen.remove(), 700);
-      });
-
-      // If your video is set to loop, auto-hide after one playthrough
-      setTimeout(() => {
-        loadingScreen.classList.add('hidden');
-        setTimeout(() => loadingScreen.remove(), 700);
-      }, loadingVideo.duration * 1000);
-    });
-  }
-});
+// --- FIXED: Only one DOMContentLoaded handler for loading sequence ---
 window.addEventListener('DOMContentLoaded', () => {
   const loadingScreen = document.getElementById('loading-screen');
   const loadingVideo = document.getElementById('loading-video');
   const firstText = document.getElementById('first-text');
   const secondText = document.getElementById('second-text');
   const mainContent = document.getElementById('main-content');
+  const whisper = document.getElementById('nilou-whisper');
 
   function animateTexts(duration) {
-    firstText.style.opacity = 1;
-    setTimeout(() => {
-      firstText.style.opacity = 0;
+    if (firstText && secondText) {
+      firstText.style.opacity = 1;
       setTimeout(() => {
-        firstText.style.display = 'none';
-        secondText.style.display = 'inline-block';
-        secondText.style.opacity = 1;
-      }, 700);
-    }, Math.max(1200, duration * 0.5 * 1000));
-    setTimeout(() => {
-      secondText.style.opacity = 0;
-    }, duration * 1000 - 700);
+        firstText.style.opacity = 0;
+        setTimeout(() => {
+          firstText.style.display = 'none';
+          secondText.style.display = 'inline-block';
+          secondText.style.opacity = 1;
+        }, 700);
+      }, Math.max(1200, duration * 0.5 * 1000));
+      setTimeout(() => {
+        secondText.style.opacity = 0;
+      }, duration * 1000 - 700);
+    }
   }
 
   if (loadingVideo && loadingScreen) {
@@ -251,59 +213,65 @@ window.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         loadingScreen.remove();
         if (mainContent) mainContent.style.display = '';
+        // Fade in nilou-whisper after 3 seconds
+        setTimeout(() => whisper?.classList.add('opacity-100'), 3000);
       }, 700);
     });
   }
 });
-hr { display: none; }
-section { box-shadow: none; border: none; }
+
+// --- CSS rules moved out of JS file (they don't belong in JS!) ---
+
+// --- Gallery auto-scroll and drag ---
 const gallery = document.querySelector('.auto-scroll-gallery');
 let isDragging = false;
 let startX, scrollStart;
 let autoScroll = true;
 
-// 1) Auto‑scroll loop
-function autoScrollLoop() {
-  if (autoScroll && !isDragging) {
-    gallery.scrollLeft += 1;  // tweak speed here
+if (gallery) {
+  // 1) Auto‑scroll loop
+  function autoScrollLoop() {
+    if (autoScroll && !isDragging) {
+      gallery.scrollLeft += 1;  // tweak speed here
+    }
+    requestAnimationFrame(autoScrollLoop);
   }
-  requestAnimationFrame(autoScrollLoop);
+  autoScrollLoop();
+
+  // 2) Handle drag start
+  function dragStart(e) {
+    isDragging = true;
+    autoScroll = false;
+    startX = e.type.includes('mouse') 
+      ? e.pageX 
+      : e.touches[0].pageX;
+    scrollStart = gallery.scrollLeft;
+  }
+
+  // 3) Handle dragging
+  function dragging(e) {
+    if (!isDragging) return;
+    const x = e.type.includes('mouse') 
+      ? e.pageX 
+      : e.touches[0].pageX;
+    const delta = startX - x;
+    gallery.scrollLeft = scrollStart + delta;
+  }
+
+  // 4) Handle drag end
+  function dragEnd() {
+    isDragging = false;
+    autoScroll = true;  // resume auto‑scroll immediately
+  }
+
+  // 5) Attach events
+  gallery.addEventListener('mousedown',   dragStart);
+  gallery.addEventListener('touchstart',  dragStart, { passive: true });
+
+  window.addEventListener('mousemove',    dragging);
+  window.addEventListener('touchmove',    dragging,   { passive: true });
+
+  window.addEventListener('mouseup',      dragEnd);
+  window.addEventListener('touchend',     dragEnd);
+  window.addEventListener('touchcancel',  dragEnd);
 }
-autoScrollLoop();
-
-// 2) Handle drag start
-function dragStart(e) {
-  isDragging = true;
-  autoScroll = false;
-  startX = e.type.includes('mouse') 
-    ? e.pageX 
-    : e.touches[0].pageX;
-  scrollStart = gallery.scrollLeft;
-}
-
-// 3) Handle dragging
-function dragging(e) {
-  if (!isDragging) return;
-  const x = e.type.includes('mouse') 
-    ? e.pageX 
-    : e.touches[0].pageX;
-  const delta = startX - x;
-  gallery.scrollLeft = scrollStart + delta;
-}
-
-// 4) Handle drag end
-function dragEnd() {
-  isDragging = false;
-  autoScroll = true;  // resume auto‑scroll immediately
-}
-
-// 5) Attach events
-gallery.addEventListener('mousedown',   dragStart);
-gallery.addEventListener('touchstart',  dragStart, { passive: true });
-
-window.addEventListener('mousemove',    dragging);
-window.addEventListener('touchmove',    dragging,   { passive: true });
-
-window.addEventListener('mouseup',      dragEnd);
-window.addEventListener('touchend',     dragEnd);
-window.addEventListener('touchcancel',  dragEnd);
