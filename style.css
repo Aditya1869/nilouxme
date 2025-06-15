@@ -398,8 +398,8 @@ section { box-shadow: none; border: none; }
 }
 .auto-scroll-gallery img {
   height: 90px;
-  width: 185px;
-  max-width: 260px;
+  width: auto;
+  max-width: 160px;
   border-radius: 1rem;
   object-fit: cover;
 }
@@ -414,4 +414,12 @@ section { box-shadow: none; border: none; }
 .min-w-\[300px\], .min-w-\[200px\] {
   position: relative;
   width: 250px; /* or your preferred width */
+}
+#loading-screen {
+  transition: opacity 0.7s;
+  background: #000;
+}
+#loading-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
