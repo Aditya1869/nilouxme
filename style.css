@@ -398,7 +398,7 @@ section { box-shadow: none; border: none; }
 }
 .auto-scroll-gallery img {
   height: 90px;
-  width: auto;
+  width: 185px;
   max-width: 260px;
   border-radius: 1rem;
   object-fit: cover;
