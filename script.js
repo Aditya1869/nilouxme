@@ -225,8 +225,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const loadingVideo = document.getElementById('loading-video');
   const firstText = document.getElementById('first-text');
   const secondText = document.getElementById('second-text');
+  const mainContent = document.getElementById('main-content');
 
-  // Animate text sequence based on video duration
   function animateTexts(duration) {
     firstText.style.opacity = 1;
     setTimeout(() => {
@@ -248,7 +248,10 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     loadingVideo.addEventListener('ended', () => {
       loadingScreen.classList.add('hidden');
-      setTimeout(() => loadingScreen.remove(), 700);
+      setTimeout(() => {
+        loadingScreen.remove();
+        if (mainContent) mainContent.style.display = '';
+      }, 700);
     });
   }
 });
