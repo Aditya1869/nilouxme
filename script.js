@@ -185,3 +185,22 @@ window.addEventListener('load', () => {
   }
   // ...rest of your code
 });
+window.addEventListener('DOMContentLoaded', () => {
+  const first = document.getElementById('first-text');
+  const second = document.getElementById('second-text');
+  first.style.opacity = '1';
+
+  setTimeout(() => {
+    first.style.display = 'none';
+    second.style.display = 'inline';
+    second.style.opacity = '1';
+  }, 2000);
+
+  // Remove loading screen after second text fades
+  setTimeout(() => {
+    document.getElementById('loading-screen').classList.add('hidden');
+    setTimeout(() => {
+      document.getElementById('loading-screen')?.remove();
+    }, 700);
+  }, 4000);
+});
