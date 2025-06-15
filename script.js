@@ -220,6 +220,35 @@ document.addEventListener('mousemove', e => {
     });
   }
 });
+window.addEventListener('DOMContentLoaded', () => {
+  const loadingScreen = document.getElementById('loading-screen');
+  const loadingVideo = document.getElementById('loading-video');
+  const firstText = document.getElementById('first-text');
+  const secondText = document.getElementById('second-text');
+
+  // Animate text sequence based on video duration
+  function animateTexts(duration) {
+    firstText.style.opacity = 1;
+    setTimeout(() => {
+      firstText.style.opacity = 0;
+      setTimeout(() => {
+        firstText.style.display = 'none';
+        secondText.style.display = 'inline-block';
+        secondText.style.opacity = 1;
+      }, 700);
+    }, Math.max(1200, duration * 0.5 * 1000));
+    setTimeout(() => {
+      secondText.style.opacity = 0;
+    }, duration * 1000 - 700);
+  }
+
+  if (loadingVideo && loadingScreen) {
+    loadingVideo.addEventListener('loadedmetadata', () => {
+      animateTexts(loadingVideo.duration);
+    });
+    loadingVideo.addEventListener('ended', () => {
+      loadingScreen.classList.add('hidden');
+      setTimeout(() => loadingScreen.remove(), 700);
     });
   }
 });
