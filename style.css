@@ -22,7 +22,7 @@ a, .btn, button, .clickable {
   overflow: hidden;
   display: inline-block;
   padding: 0.6rem 1.2rem;
-  background: linear-gradient()(120deg, rgba(0,200,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   color: white;
@@ -35,22 +35,39 @@ a, .btn, button, .clickable {
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  
-@keyframes socialOverlayGlow {
-  0% {
-    transform: rotate(0deg) scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: rotate(10deg) scale(1.08);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(0deg) scale(1);
-    opacity: 0.7;
-  }
+  z-index: 1;
 }
+
+/* Animated overlay for social buttons */
+.social-btn::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -75%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(0,200,255,0.18) 0%,
+    rgba(255,255,255,0.22) 50%,
+    rgba(0,200,255,0.18) 100%
+  );
+  filter: blur(8px);
+  opacity: 0.7;
+  z-index: 0;
+  animation: socialShimmer 2.5s linear infinite;
+  pointer-events: none;
 }
+
+@keyframes socialShimmer {
+  0% { left: -75%; }
+  100% { left: 100%; }
+}
+
+.social-btn > * {
+  position: relative;
+  z-index: 1;
+}
+
 .social-btn:hover, button:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: translateY(-4px) scale(1.05);
@@ -318,9 +335,6 @@ body::before {
   to { transform: scale(1);}
 }
 
-/* Zoomable image effect */
- 
-
 /* Miscellaneous */
 * { scroll-behavior: smooth; }
 #themeBtn, #toggleMusic { font-weight: bold; }
@@ -344,7 +358,7 @@ body::before {
   line-height: 1.8;
 }
 .nilou-quote {
-  position: bottom right;
+  position: absolute;
   bottom: 1rem;
   right: 2rem;
   font-size: 0.75rem;
@@ -413,5 +427,5 @@ section { box-shadow: none; border: none; }
 }
 .min-w-\[300px\], .min-w-\[200px\] {
   position: relative;
-  width: 250px; /* or your preferred width */
+  width: 250px;
 }
