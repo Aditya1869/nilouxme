@@ -398,37 +398,84 @@ body::before {
   gap: 32px;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto 50px auto;
+  margin: 0 auto 60px auto;
+  padding-bottom: 48px; /* Ensures scroll even if cards are few */
 }
+
 .scroll-row {
   display: flex;
   overflow-x: auto;
-  gap: 20px;
+  gap: 28px;
   cursor: grab;
   scroll-behavior: smooth;
-  padding-bottom: 8px;
+  padding-bottom: 14px;
   user-select: none;
   /* Hide scrollbar but allow scrolling */
   scrollbar-width: none;
 }
 .scroll-row::-webkit-scrollbar { display: none; }
+
 .gallery-item {
-  min-width: 90px;
-  background: rgba(255,255,255,0.07);
-  border-radius: 14px;
-  padding: 10px;
+  min-width: 260px;
+  max-width: 350px;
+  min-height: 180px;
+  background: rgba(255,255,255,0.09);
+  border-radius: 18px;
+  padding: 18px 12px 14px 12px;
   text-align: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
   transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.13rem;
 }
+
 .gallery-item img {
-  width: 80%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 7px;
+  width: 100%;
+  min-height: 120px;
+  max-height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
+
 .gallery-item:hover {
   transform: scale(1.04);
+}
+
+@media (max-width: 900px) {
+  .dual-scroll-gallery {
+    max-width: 98vw;
+    gap: 20px;
+    padding-bottom: 32px;
+  }
+  .gallery-item {
+    min-width: 49vw;
+    max-width: 90vw;
+    min-height: 130px;
+    padding: 10px 5px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .dual-scroll-gallery {
+    gap: 12px;
+    padding-bottom: 18px;
+  }
+  .gallery-item {
+    min-width: 90vw;
+    max-width: 98vw;
+    min-height: 110px;
+    font-size: 0.98rem;
+    padding: 7px 2vw;
+  }
+  .gallery-item img {
+    min-height: 70px;
+    max-height: 110px;
+  }
 }
 /* Shimmer animation */
 @keyframes shimmer {
