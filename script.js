@@ -177,3 +177,11 @@ document.addEventListener('mousemove', e => {
   glow.style.left = `${e.clientX}px`;
   glow.style.top = `${e.clientY}px`;
 });
+window.addEventListener('load', () => {
+  const loading = document.getElementById('loading-screen');
+  if (loading) {
+    loading.classList.add('hidden');
+    setTimeout(() => loading.remove(), 800);
+  }
+  // ...rest of your code
+});
