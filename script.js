@@ -18,7 +18,14 @@ const visualizer = document.getElementById('music-visualizer');
 
 let isPlaying = false;
 let audioCtx, analyser, source, animationId;
-
+ctx.strokeStyle = 'rgba(0,200,255,0.9)';
+ctx.lineWidth = 2;
+ctx.shadowColor = '#00c8ff';
+ctx.shadowBlur = 8;
+ctx.beginPath();
+ctx.moveTo(x, yStart);
+ctx.lineTo(x, yEnd);
+ctx.stroke();
 function startVisualizer() {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
