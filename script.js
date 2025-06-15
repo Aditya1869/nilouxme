@@ -1,4 +1,4 @@
-// 🌟 Scroll Fade Animation
+ // 🌟 Scroll Fade Animation
 function handleScrollFade() {
   const trigger = window.innerHeight * 0.85;
   document.querySelectorAll('.fade-in-up').forEach(el => {
