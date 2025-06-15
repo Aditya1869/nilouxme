@@ -385,10 +385,12 @@ body::before {
 hr { display: none; }
 section { box-shadow: none; border: none; }
 .auto-scroll-gallery {
-  width: 100vw;
+  height: auto;
+  width: 100%;
   overflow: hidden;
   padding: 2rem 0;
   display: flex;
+  object-fit: cover;
   flex-direction: column;
   gap: 2rem;
 }
