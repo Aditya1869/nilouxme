@@ -305,11 +305,11 @@ body::before {
 
 /* Zoomable image effect */
 .zoomable.clicked {
-  position: absolute;
+  position: static;
   left: 50%;
   top: 50%;
-  z-index: 100;
-  transform: translate(-50%, -50%) scale(2.5);
+  z-index: 1;
+  transform: translate(-50%, -50%) scale(1.2);
   box-shadow: 0 0 40px rgba(255,255,255,0.15);
   transition: transform 0.4s ease-in-out, box-shadow 0.4s;
 }
