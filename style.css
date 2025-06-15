@@ -428,6 +428,7 @@ section { box-shadow: none; border: none; }
 
 #loading-screen video {
   position: absolute;
+  filter: blur(2px);
   inset: 0;
   width: 100vw;
   height: 100vh;
