@@ -1,4 +1,4 @@
-/* Base setup */
+ /* Base setup */
 body {
   background-color: #000;
   color: #fff;
@@ -399,4 +399,42 @@ section { box-shadow: none; border: none; }
 .min-w-\[300px\], .min-w-\[200px\] {
   position: relative;
   width: 250px; /* or your preferred width */
+}
+.social-btn {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.social-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: linear-gradient(120deg, rgba(0,200,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
+  filter: blur(12px);
+  opacity: 0.7;
+  z-index: 0;
+  animation: socialOverlayGlow 2.5s linear infinite;
+}
+
+@keyframes socialOverlayGlow {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(10deg) scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+}
+
+/* Ensure button content is above the overlay */
+.social-btn > * {
+  position: relative;
+  z-index: 1;
 }
