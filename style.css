@@ -407,12 +407,14 @@ section { box-shadow: none; border: none; }
   animation: scrollGalleryRight 50s linear infinite;
 }
 .auto-scroll-gallery img {
-  height: 90px;
-  width: auto;
-  max-width: 160px;
-  border-radius: 1rem;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
+  border-radius: 1rem;
+  display: block;
 }
+
 @keyframes scrollGalleryLeft {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
