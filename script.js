@@ -181,3 +181,9 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+window.addEventListener('load', () => {
+  document.getElementById('loading-screen')?.classList.add('hidden');
+  setTimeout(() => {
+    document.getElementById('loading-screen')?.remove();
+  }, 4000);
+});
