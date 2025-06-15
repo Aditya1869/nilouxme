@@ -335,15 +335,13 @@ body::before {
   transition: transform 0.1s linear;
 }
 .from-aadi-message {
-  position: relative;
-  min-height: 38vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   margin-bottom: 2.5rem;
-  padding-bottom: 4.5rem; /* ensures room for quote */
+  /* Remove position: relative, min-height, and large padding-bottom! */
 }
 
 .aadi-center-message {
@@ -356,27 +354,23 @@ body::before {
 }
 
 .nilou-quote {
-  position: absolute;
-  right: 2.5rem;
-  bottom: 1.2rem;
+  align-self: flex-end;
   font-size: 1rem;
   font-style: italic;
   opacity: 0.77;
   color: #d0e0ff;
   text-align: right;
+  margin-top: 1.5rem;
+  margin-right: 2.5rem;
   max-width: 380px;
-  pointer-events: none; /* so it won't block interactions */
+  /* Remove position: absolute and bottom/right! */
 }
 
-/* Responsive: on mobile, keep quote bottom right but allow wrapping */
 @media (max-width: 700px) {
   .nilou-quote {
-    right: 1rem;
-    left: 1rem;
-    bottom: 0.7rem;
+    margin-right: 1rem;
     font-size: 0.93rem;
     max-width: 95vw;
-    text-align: right;
   }
 }
 .our-gallery, .the-floating-gallery {
