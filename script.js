@@ -161,14 +161,12 @@ document.querySelectorAll('.zoomable').forEach(img => {
 });
 
 // ✨ Highlight Clicked Image Temporarily
-document.addEventListener("DOMContentLoaded", () => {
-  const zoomables = document.querySelectorAll('.zoomable');
-  zoomables.forEach(img => {
-    img.addEventListener('click', () => {
-      zoomables.forEach(other => other !== img && other.classList.remove('clicked'));
-      img.classList.add('clicked');
-      setTimeout(() => img.classList.remove('clicked'), 3000);
-    });
+document.querySelectorAll('.zoomable').forEach(img => {
+  img.addEventListener('click', function () {
+    this.classList.add('clicked');
+    setTimeout(() => {
+      this.classList.remove('clicked');
+    }, 3000); // 3 seconds
   });
 });
 
