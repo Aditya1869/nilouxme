@@ -429,3 +429,22 @@ section { box-shadow: none; border: none; }
   position: relative;
   width: 250px;
 }
+@media (max-width: 640px) {
+  .rounded-xl, .bg-white\/10, .backdrop-blur, .p-6, .p-4 {
+    padding: 1rem !important;
+    border-radius: 0.75rem !important;
+  }
+  .text-4xl, .text-3xl, .text-2xl, .text-xl, .text-lg {
+    font-size: 1.1rem !important;
+  }
+  #music-toggle {
+    right: 1rem !important;
+    bottom: 1rem !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 1rem !important;
+  }
+  .auto-scroll-gallery img {
+    height: 60px !important;
+    max-width: 100px !important;
+  }
+}
