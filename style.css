@@ -399,17 +399,20 @@ body::before {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 60px auto;
-  padding-bottom: 48px; /* Ensures scroll even if cards are few */
+  padding-bottom: 48px;
 }
 
 .scroll-row {
   display: flex;
+  flex-direction: row;
   overflow-x: auto;
+  overflow-y: hidden;
   gap: 28px;
   cursor: grab;
   scroll-behavior: smooth;
   padding-bottom: 14px;
   user-select: none;
+  width: 100%;
   /* Hide scrollbar but allow scrolling */
   scrollbar-width: none;
 }
@@ -429,6 +432,7 @@ body::before {
   flex-direction: column;
   align-items: center;
   font-size: 1.13rem;
+  flex: 0 0 auto; /* Prevent stretching/shrinking in the flex row */
 }
 
 .gallery-item img {
@@ -446,14 +450,9 @@ body::before {
 }
 
 @media (max-width: 900px) {
-  .dual-scroll-gallery {
-    max-width: 98vw;
-    gap: 20px;
-    padding-bottom: 32px;
-  }
   .gallery-item {
-    min-width: 49vw;
-    max-width: 90vw;
+    min-width: 60vw;
+    max-width: 80vw;
     min-height: 130px;
     padding: 10px 5px;
     font-size: 1rem;
@@ -461,12 +460,8 @@ body::before {
 }
 
 @media (max-width: 700px) {
-  .dual-scroll-gallery {
-    gap: 12px;
-    padding-bottom: 18px;
-  }
   .gallery-item {
-    min-width: 90vw;
+    min-width: 85vw;
     max-width: 98vw;
     min-height: 110px;
     font-size: 0.98rem;
