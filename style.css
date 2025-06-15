@@ -115,10 +115,6 @@ a[href^="#"]:hover {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
   }
-  #gallery .min-w-\[300px\] {
-    position: relative;
-    width: 250px;
-  }
 }
 
 /* Fireflies */
@@ -306,11 +302,14 @@ body::before {
   from { transform: scale(0.8);}
   to { transform: scale(1);}
 }
-.min-w-\[300px\], .min-w-\[200px\] {
+
+/* Zoomable image effect */
+.min-w-\[200px\], .min-w-\[300px\] {
   position: relative;
   width: 250px; /* or your preferred width */
+  /* Do NOT add overflow: hidden here */
 }
-/* Zoomable image effect */
+
 .zoomable.clicked {
   position: absolute;
   left: 50%;
