@@ -1,17 +1,12 @@
-/* ---------------- BASE SETUP ---------------- */
+  
+/* Base setup */
 body {
   background-color: #000;
   color: #fff;
   font-family: 'Playfair Display', serif;
   cursor: url('assets/cursor.png'), auto;
   transition: all 0.3s ease-in-out;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  width: 100vw;
-  overflow-x: hidden;
 }
-* { scroll-behavior: smooth; }
 
 /* Hide default scrollbar */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -22,29 +17,48 @@ a, .btn, button, .clickable {
   cursor: url('assets/cursor-hover.png'), pointer;
 }
 
-/* ---------------- BUTTONS ---------------- */
+/* Social Buttons & Button Styles */
 .social-btn, button {
   position: relative;
   overflow: hidden;
   display: inline-block;
   padding: 0.6rem 1.2rem;
-  background: linear-gradient(120deg, rgba(0,200,255,0.15), rgba(255,255,255,0.08));
+  background: linear-gradient()(120deg, rgba(0,200,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   color: white;
   font-weight: bold;
-  font-size: 1rem;
-  margin: 10px;
-  text-align: center;
   text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  
+@keyframes socialOverlayGlow {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(10deg) scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+}
 }
 .social-btn:hover, button:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: translateY(-4px) scale(1.05);
   box-shadow: 0 6px 20px rgba(0, 200, 255, 0.4);
+}
+.social-btn:active::after, button:active::after {
+  width: 200px; height: 200px; transition: 0s;
 }
 .social-btn::after, button::after {
   content: "";
@@ -57,34 +71,23 @@ a, .btn, button, .clickable {
   pointer-events: none;
   transition: width 0.4s, height 0.4s;
 }
-.social-btn:active::after, button:active::after {
-  width: 200px; height: 200px;
-  transition: 0s;
-}
 
-/* ---------------- SECTIONS & CARDS ---------------- */
+/* Section Styling */
 section {
   background: rgba(0, 0, 0, 0.4);
   border-radius: 1.5rem;
   padding: 2rem;
   backdrop-filter: blur(6px);
-  margin: 1.5rem auto;
-  max-width: 900px;
-  width: 95vw;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
 }
-section, hr {
-  box-shadow: none;
-  border: none;
-}
+
+/* Rounded Cards */
 .rounded-xl {
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   box-shadow: 0 0 16px rgba(255, 255, 255, 0.05);
-  margin: 1rem auto;
-  max-width: 420px;
-  width: 90vw;
 }
 .rounded-xl:hover {
   box-shadow: 0 0 28px rgba(255, 255, 255, 0.1);
@@ -94,51 +97,88 @@ section, hr {
   animation: shimmer 1.5s infinite linear;
 }
 
-/* Hero Title */
-#hero h1 {
-  letter-spacing: 0.02em;
-  font-size: 2.2rem;
-  margin: 1.2rem 0;
+/* Starlight Box & Gallery Cards */
+#starlight .rounded-xl,
+#gallery .rounded-xl {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+#starlight .rounded-xl:hover,
+#gallery .rounded-xl:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
-/* ---------------- FIREFLIES & STARFIELD ---------------- */
-#fireflies, #starfield {
+/* Button hover effect for anchor links */
+a[href^="#"] {
+  transition: all 0.3s ease;
+}
+a[href^="#"]:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Hero Title Animation Placeholder */
+#hero h1 {
+  letter-spacing: 0.02em;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  #starlight .grid {
+    grid-template-columns: 1fr !important;
+  }
+  .social-btn, button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Fireflies */
+#fireflies {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  width: 100%; height: 100%;
   pointer-events: none;
-}
-.firefly, .star {
-  position: absolute;
-  width: 2px; height: 2px;
-  background: white;
-  border-radius: 50%;
+  z-index: 1;
 }
 .firefly {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  width: 2px; height: 2px;
   animation: fly 10s linear infinite;
   opacity: 0.5;
 }
-.star {
-  animation: twinkle 2s infinite ease-in-out;
-  opacity: 0.8;
-}
-
-/* Animations */
 @keyframes fly {
   0% { transform: translateY(0) translateX(0); opacity: 0.2; }
   50% { transform: translateY(-50px) translateX(30px); opacity: 1; }
   100% { transform: translateY(100px) translateX(-30px); opacity: 0.1; }
 }
+
+/* Starfield */
+#starfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background: transparent;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite ease-in-out;
+  opacity: 0.8;
+}
 @keyframes twinkle {
   0%, 100% { opacity: 0.8; transform: scale(1); }
   50% { opacity: 0.2; transform: scale(0.5); }
 }
-@keyframes shimmer {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
-}
 
-/* ---------------- PARALLAX ---------------- */
+/* Parallax Hero */
 body::before {
   content: "";
   position: fixed;
@@ -151,13 +191,15 @@ body::before {
   will-change: transform;
   pointer-events: none;
 }
+
+/* Parallax Gallery */
 :root { --scroll: 0px; }
 .parallax-gallery {
   transform: translateY(calc(var(--scroll) * 0.1px));
   transition: transform 0.1s ease-out;
 }
 
-/* ---------------- WHISPER PANEL ---------------- */
+/* Whisper Panel Text */
 #whisper-text p {
   opacity: 0.85;
   margin-bottom: 1rem;
@@ -166,7 +208,20 @@ body::before {
 }
 #whisper-text p:hover { opacity: 1; }
 
-.fade-in-up, .fade-in {
+/* Whisper Fade-in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1.4s forwards;
+}
+.fade-in.delay-1 { animation-delay: 0.8s; }
+.fade-in.delay-2 { animation-delay: 1.6s; }
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade-in-up utility */
+.fade-in-up {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -176,13 +231,8 @@ body::before {
   opacity: 1;
   transform: translateY(0);
 }
-.fade-in.delay-1 { animation-delay: 0.8s; }
-.fade-in.delay-2 { animation-delay: 1.6s; }
 
-@keyframes fadeInUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
+/* Whisper lines */
 .whisper-line {
   opacity: 0;
   transform: translateY(10px);
@@ -192,13 +242,23 @@ body::before {
 .whisper-line:nth-child(1) { animation-delay: 2.5s; }
 .whisper-line:nth-child(2) { animation-delay: 4s; }
 .whisper-line:nth-child(3) { animation-delay: 5.5s; }
-
 @keyframes whisperLineFade {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeInWhispers { to { opacity: 1; } }
 
+/* Whisper particles */
+#whisperParticles {
+  position: absolute;
+  top: 70%; left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; height: 30vh;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Nilou Whisper */
 .nilou-whisper {
   margin-top: 60px;
   text-align: center;
@@ -208,26 +268,33 @@ body::before {
   font-family: 'Segoe UI', 'Papyrus', sans-serif;
   opacity: 0;
   animation: fadeInWhispers 1.5s ease-in-out 1.5s forwards;
-  text-decoration: underline;
   background: none;
   box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: none;
+  text-decoration: underline;
 }
 
-/* ---------------- IMAGE ZOOM ---------------- */
+/* Gallery overlays and zoom */
 .zoom-overlay, #zoom-overlay {
   position: fixed;
-  inset: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   z-index: 9999;
   animation: fadeIn 0.3s ease forwards;
 }
 .zoom-overlay img, #zoomed-img {
-  max-width: 90vw;
-  max-height: 70vh;
+  max-width: 90%;
+  max-height: 80vh;
   border-radius: 12px;
   box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
   transform: scale(0.8);
@@ -239,7 +306,7 @@ body::before {
   margin-top: 15px;
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
-  max-width: 80vw;
+  max-width: 80%;
   line-height: 1.4;
   animation: fadeIn 0.6s ease forwards;
 }
@@ -252,46 +319,110 @@ body::before {
   to { transform: scale(1);}
 }
 
-/* ---------------- RESPONSIVE ---------------- */
-@media (max-width: 900px) {
-  section, .rounded-xl {
-    max-width: 98vw;
-    width: 99vw;
-    padding: 1.1rem 0.7rem;
-  }
-  #hero h1 { font-size: 1.5rem; }
+/* Zoomable image effect */
+ 
+
+/* Miscellaneous */
+* { scroll-behavior: smooth; }
+#themeBtn, #toggleMusic { font-weight: bold; }
+#cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 40px; height: 40px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 80%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.1s linear;
 }
-@media (max-width: 768px) {
-  .social-btn, button {
-    padding: 0.5rem 1rem;
-    font-size: 0.92rem;
-  }
-  section {
-    padding: 1.3rem 0.3rem;
-    border-radius: 1.1rem;
-  }
-  .rounded-xl {
-    max-width: 98vw;
-    width: 99vw;
-    margin: 1rem auto;
-  }
-  #hero h1 { font-size: 1.2rem; }
-}
-@media (max-width: 500px) {
-  html, body { font-size: 15px; }
-  section, .rounded-xl {
-    padding: 0.7rem 0.1rem;
-    border-radius: 0.7rem;
-  }
-  #hero h1 { font-size: 1.03rem; }
-  .social-btn, button {
-    padding: 0.42rem 0.7rem;
-    font-size: 0.89rem;
-    margin: 7px 2px;
-  }
+.from-aadi-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 0rem;
+  /* Remove position: relative, min-height, and large padding-bottom! */
 }
 
-/* ---------------- LOADING SCREEN ---------------- */
+.aadi-center-message {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.nilou-quote {
+  align-self: flex-end;
+  font-size: 1rem;
+  font-style: italic;
+  opacity: 0.77;
+  color: #d0e0ff;
+  text-align: right;
+  margin-top: 1.5rem;
+  margin-right: 2.5rem;
+  max-width: 380px;
+  /* Remove position: absolute and bottom/right! */
+}
+
+@media (max-width: 700px) {
+  .nilou-quote {
+    margin-right: 1rem;
+    font-size: 0.93rem;
+    max-width: 95vw;
+  }
+}
+.our-gallery, .the-floating-gallery {
+  margin-top: 3rem;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+hr { display: none; }
+section { box-shadow: none; border: none; }
+.auto-scroll-gallery {
+  width: 100vw;
+  overflow: hidden;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.scroll-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+}
+.row1 {
+  animation: scrollGalleryLeft 40s linear infinite;
+}
+.row2 {
+  animation: scrollGalleryRight 50s linear infinite;
+}
+.auto-scroll-gallery img {
+  height: 90px;
+  width: auto;
+  max-width: 160px;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+@keyframes scrollGalleryLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scrollGalleryRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.min-w-\[300px\], .min-w-\[200px\] {
+  position: relative;
+  width: 250px; /* or your preferred width */
+}
 #loading-screen {
   position: fixed;
   inset: 0;
@@ -302,15 +433,17 @@ body::before {
   z-index: 9999;
   transition: opacity 0.7s;
 }
+
 #loading-screen video {
   position: absolute;
   filter: blur(6px);
   inset: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   z-index: 1;
 }
+
 .loading-text {
   position: absolute;
   top: 55%;
@@ -319,6 +452,7 @@ body::before {
   text-align: center;
   z-index: 2;
 }
+
 .loading-text span {
   font-family: 'Segoe UI', 'Roboto', sans-serif;
   font-style: italic;
@@ -329,6 +463,7 @@ body::before {
   letter-spacing: 0.05em;
   display: inline-block;
 }
+
 #loading-screen.hidden {
   opacity: 0;
   pointer-events: none;
