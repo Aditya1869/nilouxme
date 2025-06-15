@@ -255,3 +255,13 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+function revealOnScroll() {
+  const reveals = document.querySelectorAll('.fade-in-up');
+  const trigger = window.innerHeight * 0.9;
+
+  reveals.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < trigger) el.classList.add('show');
+  });
+}
+window.addEventListener('scroll', revealOnScroll);
