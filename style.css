@@ -215,8 +215,8 @@ body::before {
   justify-content: center;
   align-items: center;
   /* Ensure cards fill row height and look even */
-  height: 160px;            /* or adjust as needed */
-  min-width: 150px;         /* or adjust as needed */
+  height: 90px;            /* or adjust as needed */
+  min-width: 160px;         /* or adjust as needed */
   background: rgba(255,255,255,0.07);
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
