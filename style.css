@@ -1,4 +1,4 @@
-/* Base setup */
+ /* Base setup */
 body {
   background-color: #000;
   color: #fff;
@@ -334,7 +334,10 @@ body::before {
   from { transform: scale(0.8);}
   to { transform: scale(1);}
 }
-
+#music-visualizer {
+  vertical-align: middle;
+  background: transparent;
+}
 /* Miscellaneous */
 * { scroll-behavior: smooth; }
 #themeBtn, #toggleMusic { font-weight: bold; }
