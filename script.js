@@ -160,15 +160,7 @@ document.querySelectorAll('.zoomable').forEach(img => {
   });
 });
 
-// ✨ Highlight Clicked Image Temporarily
-document.querySelectorAll('.zoomable').forEach(img => {
-  img.addEventListener('click', function () {
-    this.classList.add('clicked');
-    setTimeout(() => {
-      this.classList.remove('clicked');
-    }, 3000); // 3 seconds
-  });
-});
+ 
 
 // 💫 Cursor Glow
 const glow = document.createElement('div');
