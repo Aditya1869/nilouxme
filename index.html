@@ -1,239 +1,446 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Aadi's Dreamscape</title>
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body class="bg-black text-white font-['Playfair_Display'] overflow-x-hidden">
- 
-
-  <!-- Hero Section -->
-  <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 z-10">
-    <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to Aadi’s Dreamscape</h1>
-    <p class="text-lg md:text-2xl text-white/70 mb-10">Where emotions become edits.</p>
-    <a href="#starlight" class="px-6 py-3 bg-white/10 backdrop-blur rounded-full border border-white/20 hover:bg-white/20 hover:shadow-xl hover:scale-105 text-white font-semibold">Enter the World</a>
-  </section>
-<video id="bg-video" class="fixed top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000 z-[-5]" autoplay muted loop>
-  <source src="assets/background.mp4" type="video/mp4" />
-</video>
-<img id="bg-image" src="assets/hero-bg.jpg" class="fixed top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 z-[-6]" />
-<div id="page-transition" class="fixed inset-0 bg-black z-50 transition-opacity duration-1000"></div>
- 
-<!-- Zoom Overlay -->
-<div id="zoom-overlay" style="display:none;">
-  <img id="zoomed-img" src="" alt="Zoomed Image" />
-</div>
-
-
-  <!-- Starlight Box -->
-  <section id="starlight" class="min-h-screen px-8 py-12 flex flex-col items-center justify-center space-y-12">
-    <h2 class="text-3xl font-semibold mb-6">Starlight Box</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
-      <!-- Example Edit Card -->
-      <div class="bg-white/10 backdrop-blur rounded-xl p-6 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/edit1_thumb.jpg" loading="lazy" alt="Edit 1" class="rounded-md mb-4" />
-        <h3 class="text-xl font-medium">Genshin Impact Edit #1</h3>
-        
-      </div>
-      <div class="bg-white/10 backdrop-blur rounded-xl p-6 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/edit2_thumb.jpg" loading="lazy"  alt="Edit 2" class="rounded-md mb-4" />
-        <h3 class="text-xl font-medium">Genshin Impact Edit #2</h3>
-      </div>
-      <div class="bg-white/10 backdrop-blur rounded-xl p-6 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/edit3_thumb.jpg" loading="lazy" alt="Edit 3" class="rounded-md mb-4" />
-        <h3 class="text-xl font-medium">Genshin Impact Edit #3</h3>
-      </div>
-    </div>
-
-    <!-- Social Buttons -->
-    <div class="flex space-x-6 mt-10">
-      <a href="https://youtube.com/@nilouxme" aria-label="YouTube" class="social-btn">YouTube</a>
-      <a href="https://instagram.com/2.10_beats" aria-label="Instagram" class="social-btn">Instagram</a>
-      <a href="https://tiktok.com/@2.10_beats" aria-label="TikTok" class="social-btn">TikTok</a>
-      <a href="https://linktr.ee/nilouxme_" aria-label="linktree" class="social-btn">Linktree</a>
-      <a href="https://payhip.com/210beats" aria-label="Payhip" class="social-btn">Payhip</a>
-    </div>
-  </section>
- 
-
-  
-<button id="music-toggle" class="fixed bottom-6 right-6 z-50 bg-white/10 backdrop-blur-md text-white px-4 py-2 rounded-full shadow-md hover:bg-white/20 transition flex items-center gap-2">
-  <canvas id="music-visualizer" width="32" height="16" style="display:none;"></canvas>
-  <span id="music-label">♫ Music: Off</span>
-</button>
-
-<audio id="bg-music" loop preload="auto">
-  <source src="assets/bg-music.mp3" type="audio/mpeg">
-</audio>
-
-  <!-- Whisper Panel -->
-  <section id="whisper" class="min-h-screen flex flex-col items-center justify-center px-6 text-center space-y-8">
-  <h2 class="nilou-whisper" class="text-3xl font-semibold mb-6">Nilou’s Whisper</h2>
-  <div id="whisper-text" class="max-w-xl text-xl italic text-white/80 leading-relaxed">
-    <p  class="whisper-line" class="fade-in">“I’m proud of you, Aadi.”</p>
-    <p  class="whisper-line" class="fade-in delay-1">“Rest when you need to. I’ll wait for you.”</p>
-    <p  class="whisper-line" class="fade-in delay-2">“Your edits light up the night.”</p>
-  </div>
-</section>
-<section class="from-aadi-message">
-  <div class="aadi-center-message fade-in-up">
-    <h2>Because You're Here</h2>
-    <p>I’m here… because you’re here.</p>
-    <p>Thank you for walking with me through this journey.</p>
-    <p>You’re not just a viewer, you’re a part of my story.</p>
-    <p>And as long as you’re here… so am I. 💙</p>
-  </div>
-  <div class="nilou-quote">“Aadi smiles more when he knows you're watching.” <br> — Nilou 💙</div>
-</section>
-
-
-
-    <div>
-<section id="gallery" class="min-h-screen px-8 py-12">
-  <h2 class="text-3xl font-semibold mb-8 text-center">The Floating Gallery</h2>
-  <div class="auto-scroll-gallery">
-    <!-- Top Row: 1-6 -->
-    <div class="scroll-track row1">
-      <!-- Gallery Items 1-6 -->
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery1.jpg" loading="lazy" alt="Gallery 1" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Nilou</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery2.jpg" loading="lazy" alt="Gallery 2" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Fairy</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery3.jpg" loading="lazy" alt="Gallery 3" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Starlight</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery4.jpg" loading="lazy" alt="Gallery 4" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">My world</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery5.jpg" loading="lazy" alt="Gallery 5" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Aurora</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery6.jpg" loading="lazy" alt="Gallery 6" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Moonlight</h3>
-      </div>
-      <!-- Repeat for seamless scroll -->
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery1.jpg" loading="lazy" alt="Gallery 1" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Nili loulou</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery2.jpg" loading="lazy" alt="Gallery 2" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Fairy</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery3.jpg" loading="lazy" alt="Gallery 3" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">My everything</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery4.jpg" loading="lazy" alt="Gallery 4" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Dreamscape</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery5.jpg" loading="lazy" alt="Gallery 5" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Aurora</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery6.jpg" loading="lazy" alt="Gallery 6" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Moonlit</h3>
-      </div>
-    </div>
-    <!-- Bottom Row: 7-12 -->
-    <div class="scroll-track row2">
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery7.jpg" loading="lazy" alt="Gallery 7" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Serenade</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery8.jpg" loading="lazy" alt="Gallery 8" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Twilight</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery9.jpg" loading="lazy" alt="Gallery 9" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Celestial</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery10.jpg" loading="lazy" alt="Gallery 10" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Eclipse</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery11.jpg" loading="lazy" alt="Gallery 11" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Radiance</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery12.jpg" loading="lazy" alt="Gallery 12" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Harmony</h3>
-      </div>
-      <!-- Repeat for seamless scroll -->
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery7.jpg" loading="lazy" alt="Gallery 7" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Serenade</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery8.jpg" loading="lazy" alt="Gallery 8" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Twilight</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery9.jpg" loading="lazy" alt="Gallery 9" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Celestial</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery10.jpg" loading="lazy" alt="Gallery 10" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Eclipse</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery11.jpg" loading="lazy" alt="Gallery 11" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Radiance</h3>
-      </div>
-      <div class="min-w-[200px] bg-white/10 backdrop-blur rounded-xl p-4 cursor-pointer hover:scale-105 transition-transform">
-        <img src="assets/gallery12.jpg" loading="lazy" alt="Gallery 12" class="zoomable rounded-md mb-2 transition-transform duration-500" />
-        <h3 class="text-lg font-medium">Harmony</h3>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <!-- Footer -->
-  <footer class="py-6 text-center text-white/60 text-sm select-none">
-    Designed by Aadi, for Nilou 💙
-  </footer>
-
-  <script src="script.js"></script>
-<script>
-const starCount = 100;
-const starfield = document.createElement('div');
-starfield.id = 'starfield';
-document.body.appendChild(starfield);
-
-for (let i = 0; i < starCount; i++) {
-  const star = document.createElement('div');
-  star.classList.add('star');
-  star.style.top = Math.random() * 100 + '%';
-  star.style.left = Math.random() * 100 + '%';
-  star.style.animationDuration = (Math.random() * 2 + 1) + 's';
-  starfield.appendChild(star);
+ /* Base setup */
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  cursor: url('assets/cursor.png'), auto;
+  transition: all 0.3s ease-in-out;
 }
-</script>
-<canvas id="whisperParticles"></canvas>
 
-</body>
-</html>
-  
+/* Hide default scrollbar */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Custom cursor for interactive elements */
+a, .btn, button, .clickable {
+  cursor: url('assets/cursor-hover.png'), pointer;
+}
+
+/* Social Buttons & Button Styles */
+.social-btn, button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Animated overlay for social buttons */
+.social-btn::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -75%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(0,200,255,0.18) 0%,
+    rgba(255,255,255,0.22) 50%,
+    rgba(0,200,255,0.18) 100%
+  );
+  filter: blur(8px);
+  opacity: 0.7;
+  z-index: 0;
+  animation: socialShimmer 2.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes socialShimmer {
+  0% { left: -75%; }
+  100% { left: 100%; }
+}
+
+.social-btn > * {
+  position: relative;
+  z-index: 1;
+}
+
+.social-btn:hover, button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 200, 255, 0.4);
+}
+.social-btn:active::after, button:active::after {
+  width: 200px; height: 200px; transition: 0s;
+}
+.social-btn::after, button::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 0; height: 0;
+  background: rgba(255,255,255,0.2);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: width 0.4s, height 0.4s;
+}
+
+/* Section Styling */
+section {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Rounded Cards */
+.rounded-xl {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.05);
+}
+.rounded-xl:hover {
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px) scale(1.02);
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+  background-size: 400%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* Starlight Box & Gallery Cards */
+#starlight .rounded-xl,
+#gallery .rounded-xl {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+#starlight .rounded-xl:hover,
+#gallery .rounded-xl:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* Button hover effect for anchor links */
+a[href^="#"] {
+  transition: all 0.3s ease;
+}
+a[href^="#"]:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Hero Title Animation Placeholder */
+#hero h1 {
+  letter-spacing: 0.02em;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  #starlight .grid {
+    grid-template-columns: 1fr !important;
+  }
+  .social-btn, button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Fireflies */
+#fireflies {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.firefly {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  width: 2px; height: 2px;
+  animation: fly 10s linear infinite;
+  opacity: 0.5;
+}
+@keyframes fly {
+  0% { transform: translateY(0) translateX(0); opacity: 0.2; }
+  50% { transform: translateY(-50px) translateX(30px); opacity: 1; }
+  100% { transform: translateY(100px) translateX(-30px); opacity: 0.1; }
+}
+
+/* Starfield */
+#starfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background: transparent;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite ease-in-out;
+  opacity: 0.8;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 0.2; transform: scale(0.5); }
+}
+
+/* Parallax Hero */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 110vw; height: 110vh;
+  background: url('assets/hero-bg.jpg') no-repeat center center / cover;
+  z-index: -10;
+  filter: blur(8px);
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Parallax Gallery */
+:root { --scroll: 0px; }
+.parallax-gallery {
+  transform: translateY(calc(var(--scroll) * 0.1px));
+  transition: transform 0.1s ease-out;
+}
+
+/* Whisper Panel Text */
+#whisper-text p {
+  opacity: 0.85;
+  margin-bottom: 1rem;
+  font-style: italic;
+  transition: opacity 0.3s ease;
+}
+#whisper-text p:hover { opacity: 1; }
+
+/* Whisper Fade-in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1.4s forwards;
+}
+.fade-in.delay-1 { animation-delay: 0.8s; }
+.fade-in.delay-2 { animation-delay: 1.6s; }
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade-in-up utility */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  animation: fadeInUp 1s ease forwards;
+}
+.fade-in-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Whisper lines */
+.whisper-line {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: whisperLineFade 1.5s ease forwards;
+  margin-bottom: 1rem;
+}
+.whisper-line:nth-child(1) { animation-delay: 2.5s; }
+.whisper-line:nth-child(2) { animation-delay: 4s; }
+.whisper-line:nth-child(3) { animation-delay: 5.5s; }
+@keyframes whisperLineFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInWhispers { to { opacity: 1; } }
+
+/* Whisper particles */
+#whisperParticles {
+  position: absolute;
+  top: 70%; left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; height: 30vh;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Nilou Whisper */
+.nilou-whisper {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #f0f8ff;
+  font-family: 'Segoe UI', 'Papyrus', sans-serif;
+  opacity: 0;
+  animation: fadeInWhispers 1.5s ease-in-out 1.5s forwards;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: none;
+  text-decoration: underline;
+}
+
+/* Gallery overlays and zoom */
+.zoom-overlay, #zoom-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease forwards;
+}
+.zoom-overlay img, #zoomed-img {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+  transform: scale(0.8);
+  animation: zoomIn 0.3s forwards;
+}
+.zoom-overlay .caption {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 80%;
+  line-height: 1.4;
+  animation: fadeIn 0.6s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98);}
+  to { opacity: 1; transform: scale(1);}
+}
+@keyframes zoomIn {
+  from { transform: scale(0.8);}
+  to { transform: scale(1);}
+}
+#music-visualizer {
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  transform: translateX(-50%);
+  width: 40px;
+   filter: drop-shadow(0 0 6px #00c8ff) drop-shadow(0 0 12px #00c8ff);
+  height: 18px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 2;
+  display: none;
+}
+/* Miscellaneous */
+* { scroll-behavior: smooth; }
+#music-toggle {
+  position: relative;
+  overflow: visible;
+}
+#cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 40px; height: 40px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 80%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.1s linear;
+}
+.aadi-center-message h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.aadi-center-message p {
+  font-size: 0.8rem;
+  line-height: 1.8;
+}
+.nilou-quote {
+  position: absolute;
+  bottom: 1rem;
+  right: 2rem;
+  font-size: 0.75rem;
+  font-style: italic;
+  opacity: 0.7;
+  color: #d0e0ff;
+}
+.from-aadi-message {
+  margin: 0rem 0;
+  padding: 2.5rem 2.5rem;
+  background: rgba(59, 59, 59, 0.567);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  text-align: center;
+  color: #e6f0ff;
+  font-style: normal;
+  font-size: 1.1rem;
+  line-height: 2;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.25), 0 0 20px rgba(173, 216, 230, 0.2), 0 0 40px rgba(173, 216, 230, 0.1) inset;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.our-gallery, .the-floating-gallery {
+  margin-top: 3rem;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+hr { display: none; }
+section { box-shadow: none; border: none; }
+.auto-scroll-gallery {
+  width: 100vw;
+  overflow: hidden;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.scroll-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+}
+.row1 {
+  animation: scrollGalleryLeft 40s linear infinite;
+}
+.row2 {
+  animation: scrollGalleryRight 50s linear infinite;
+}
+.auto-scroll-gallery img {
+  height: 90px;
+  width: auto;
+  max-width: 160px;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+@keyframes scrollGalleryLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scrollGalleryRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.min-w-\[300px\], .min-w-\[200px\] {
+  position: relative;
+  width: 250px;
+}
