@@ -413,7 +413,6 @@ section { box-shadow: none; border: none; }
 .auto-scroll-gallery img {
   width: 100%;
   height: auto;
-  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 1rem;
   display: block;
