@@ -13,7 +13,20 @@ body {
 .hero-fade {
   animation: fadeInSoft 1s ease-out forwards;
 }
-
+.site-footer {
+  width: 100%;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 0rem;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+  margin-top: 3rem;
+  font-family: 'Segoe UI', sans-serif;
+}
 /* Hide default scrollbar */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
