@@ -20,7 +20,6 @@ body {
 }
 .site-footer {
   width: 100%;
-  padding: 2rem;
   text-align: center;
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.65);
@@ -29,7 +28,6 @@ body {
   -webkit-backdrop-filter: blur(6px);
   border-radius: 2rem;
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
-  margin-top: 3rem;
   font-family: 'Segoe UI', sans-serif;
 }
 /* Hide default scrollbar */
