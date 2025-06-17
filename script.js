@@ -83,7 +83,19 @@ window.addEventListener('load', () => {
   setTimeout(() => whisper?.classList.add('opacity-100'), 3000);
 });
 
- 
+// 🌌 Firefly Generator
+const fireflyContainer = document.getElementById('fireflies');
+if (fireflyContainer) {
+  for (let i = 0; i < 40; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'firefly';
+    dot.style.top = `${Math.random() * 100}vh`;
+    dot.style.left = `${Math.random() * 100}vw`;
+    dot.style.animationDuration = `${8 + Math.random() * 4}s`;
+    dot.style.width = dot.style.height = `${1 + Math.random() * 2}px`;
+    fireflyContainer.appendChild(dot);
+  }
+}
 
 // 🌠 Parallax on Scroll
 window.addEventListener('scroll', () => {
