@@ -13,7 +13,34 @@ body {
 .hero-fade {
   animation: fadeInSoft 1s ease-out forwards;
 }
- 
+.auto-scroll-gallery {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.scroll-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: scroll 60s linear infinite;
+}
+
+.scroll-track.row2 {
+  animation-direction: reverse;
+  animation-duration: 80s;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+} 
 @media (max-width: 768px) {
   #starlight .grid {
     grid-template-columns: repeat(2, 1fr);
