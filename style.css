@@ -348,30 +348,73 @@ section { box-shadow: none; border: none; }
   overflow: hidden;
   padding: 2rem 0;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   flex-direction: column;
   gap: 2rem;
 }
+
 .scroll-track {
   display: flex;
-  gap: 1.5rem;
   width: max-content;
+  gap: 1.5rem;
 }
+
 .row1 {
   animation: scrollGalleryLeft 40s linear infinite;
 }
 .row2 {
   animation: scrollGalleryRight 50s linear infinite;
 }
+
 .auto-scroll-gallery img {
-  width: 100%;
-  height: 100%;
+  width: 250px;
+  height: 180px;
   object-fit: cover;
   border-radius: 1rem;
   display: block;
+  transition: transform 0.3s ease;
 }
-@media (max-width: 768px) {}
+
+.image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+/* Optional: Fade edges with gradient mask */
+.auto-scroll-gallery::before,
+.auto-scroll-gallery::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 5rem;
+  z-index: 2;
+  pointer-events: none;
+}
+.auto-scroll-gallery::before {
+  left: 0;
+  background: linear-gradient(to right, #000000, transparent);
+}
+.auto-scroll-gallery::after {
+  right: 0;
+  background: linear-gradient(to left, #000000, transparent);
+}
+
+/* KEYFRAMES */
+@keyframes scrollGalleryLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scrollGalleryRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.image-wrapper {
+  min-width: 250px;
+  position: relative;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .scroll-track {
     flex-wrap: wrap;
     justify-content: center;
@@ -381,24 +424,15 @@ section { box-shadow: none; border: none; }
   .scroll-track .image-wrapper {
     flex: 0 1 45%;
     max-width: 45%;
-    min-width: unset;
     margin-bottom: 1rem;
   }
 
- 
+  .row1,
+  .row2 {
+    animation: none !important;
+  }
+}
 
-@keyframes scrollGalleryLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes scrollGalleryRight {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
-.image-wrapper {
-  min-width: 250px; /* or 200px, 300px — your call */
-  position: relative;
-}
 #loading-screen {
   position: fixed;
   inset: 0;
