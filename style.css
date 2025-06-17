@@ -211,3 +211,27 @@ footer {
     margin-bottom: 1rem;
   }
 }
+@media (max-width: 768px) {
+  .whisper-box,
+  section,
+  .scroll-track img,
+  .cursor-follower {
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .scroll-track img:hover {
+    transform: none !important;
+  }
+
+  body {
+    background-attachment: scroll !important;
+  }
+
+  video, canvas {
+    display: none !important;
+  }
+}
