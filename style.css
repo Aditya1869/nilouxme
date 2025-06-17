@@ -13,44 +13,7 @@ body {
 .hero-fade {
   animation: fadeInSoft 1s ease-out forwards;
 }
-.auto-scroll-gallery {
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
 
-.scroll-track {
-  display: flex;
-  gap: 1rem;
-  width: max-content;
-  animation: scroll 60s linear infinite;
-}
-
-.scroll-track.row2 {
-  animation-direction: reverse;
-  animation-duration: 80s;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-} 
-@media (max-width: 768px) {
-  #starlight .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 480px) {
-  #starlight .grid {
-    grid-template-columns: 1fr;
-  }
-}
 /* Hide default scrollbar */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
@@ -135,20 +98,7 @@ section {
 #gallery .rounded-xl:hover {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
-#starlight .grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem; /* adjust if needed */
-}
-#starlight img {
-  width: 100%;
-  height: auto;
-  max-width: 240px;
-  border-radius: 1rem;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto;
-}
+
 /* Button hover effect for anchor links */
 a[href^="#"] {
   transition: all 0.3s ease;
@@ -163,33 +113,25 @@ a[href^="#"]:hover {
   letter-spacing: 0.02em;
 }
 
+/* Responsive Tweaks */
 @media (max-width: 768px) {
-  .scroll-track {
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
+  #starlight .grid {
+    grid-template-columns: 1fr !important;
   }
-
-  .scroll-track .image-wrapper {
-    flex: 0 1 45%;
-    max-width: 45%;
-    min-width: unset;
-    margin-bottom: 1rem;
-  }
-} /* <-- This was missing */
-  
   .social-btn, button {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
   }
 }
+
+ 
  
 /* Parallax Hero */
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
-  width: 100%; height: 100%;
+  width: 110vw; height: 110vh;
   background: url('assets/hero-bg.jpg') no-repeat center center / cover;
   z-index: -10;
   filter: blur(8px);
@@ -396,57 +338,45 @@ section { box-shadow: none; border: none; }
   overflow: hidden;
   padding: 2rem 0;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   flex-direction: column;
   gap: 2rem;
 }
-
 .scroll-track {
   display: flex;
-  width: max-content;
   gap: 1.5rem;
+  width: max-content;
 }
-
 .row1 {
   animation: scrollGalleryLeft 40s linear infinite;
 }
 .row2 {
   animation: scrollGalleryRight 50s linear infinite;
 }
-
 .auto-scroll-gallery img {
-  width: 250px;
-  height: 180px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 1rem;
   display: block;
-  transition: transform 0.3s ease;
 }
+@media (max-width: 768px) {
+  .scroll-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
 
-.image-wrapper:hover img {
-  transform: scale(1.05);
-}
+  .scroll-track .image-wrapper {
+    flex: 0 1 45%;
+    max-width: 45%;
+    min-width: unset;
+    margin-bottom: 1rem;
+  }
 
-/* Optional: Fade edges with gradient mask */
-.auto-scroll-gallery::before,
-.auto-scroll-gallery::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 5rem;
-  z-index: 2;
-  pointer-events: none;
-}
-.auto-scroll-gallery::before {
-  left: 0;
-  background: linear-gradient(to right, #000000, transparent);
-}
-.auto-scroll-gallery::after {
-  right: 0;
-  background: linear-gradient(to left, #000000, transparent);
-}
+ 
 
-/* KEYFRAMES */
 @keyframes scrollGalleryLeft {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -455,26 +385,10 @@ section { box-shadow: none; border: none; }
   0% { transform: translateX(-50%); }
   100% { transform: translateX(0); }
 }
-
-.image-wrapper {
-  min-width: 250px;
+.min-w-\[300px\], .min-w-\[200px\] {
   position: relative;
+  width: 250px; /* or your preferred width */
 }
-
- 
-
-  .scroll-track .image-wrapper {
-    flex: 0 1 45%;
-    max-width: 45%;
-    margin-bottom: 1rem;
-  }
-
-  .row1,
-  .row2 {
-    animation: none !important;
-  }
-}
-
 #loading-screen {
   position: fixed;
   inset: 0;
