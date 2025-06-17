@@ -22,6 +22,7 @@ body {
   width: 100%;
   text-align: center;
   font-size: 0.9rem;
+  padding-top: 2.5rem;
   color: rgba(255, 255, 255, 0.65);
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(6px);
