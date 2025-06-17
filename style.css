@@ -98,7 +98,20 @@ section {
 #gallery .rounded-xl:hover {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
-
+#starlight .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem; /* adjust if needed */
+}
+#starlight img {
+  width: 100%;
+  height: auto;
+  max-width: 240px;
+  border-radius: 1rem;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
 /* Button hover effect for anchor links */
 a[href^="#"] {
   transition: all 0.3s ease;
