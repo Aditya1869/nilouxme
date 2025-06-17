@@ -413,13 +413,7 @@ section { box-shadow: none; border: none; }
   position: relative;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .scroll-track {
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-  }
+ 
 
   .scroll-track .image-wrapper {
     flex: 0 1 45%;
