@@ -155,7 +155,7 @@ body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
-  width: 110vw; height: 110vh;
+  width: 100vw; height: 110vh;
   background: url('assets/hero-bg.jpg') no-repeat center center / cover;
   z-index: -10;
   filter: blur(8px);
