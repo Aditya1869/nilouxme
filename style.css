@@ -14,6 +14,16 @@ body {
   animation: fadeInSoft 1s ease-out forwards;
 }
 
+@media (max-width: 768px) {
+  #starlight .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  #starlight .grid {
+    grid-template-columns: 1fr;
+  }
+}
 /* Hide default scrollbar */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
