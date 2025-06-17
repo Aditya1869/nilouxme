@@ -229,8 +229,23 @@
   </footer>
 
   <script src="script.js"></script>
- 
+<script>
+const starCount = 100;
+const starfield = document.createElement('div');
+starfield.id = 'starfield';
+document.body.appendChild(starfield);
+
+for (let i = 0; i < starCount; i++) {
+  const star = document.createElement('div');
+  star.classList.add('star');
+  star.style.top = Math.random() * 100 + '%';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+  starfield.appendChild(star);
+}
+</script>
 <canvas id="whisperParticles"></canvas>
 
 </body>
 </html>
+  
