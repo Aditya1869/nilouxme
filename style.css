@@ -113,8 +113,20 @@ a[href^="#"]:hover {
   letter-spacing: 0.02em;
 }
 
-/* Responsive Tweaks */
 @media (max-width: 768px) {
+  .scroll-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .scroll-track .image-wrapper {
+    flex: 0 1 45%;
+    max-width: 45%;
+    min-width: unset;
+    margin-bottom: 1rem;
+  }
+} /* <-- This was missing */
   #starlight .grid {
     grid-template-columns: 1fr !important;
   }
