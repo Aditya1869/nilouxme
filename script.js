@@ -49,7 +49,7 @@ function fadeOut(audio, duration = 1000) {
 musicToggle?.addEventListener('click', () => {
   if (!music) return console.error("Audio element not found!");
   isPlaying ? fadeOut(music) : fadeIn(music);
-  musicToggle.textContent = `♫ Music: ${isPlaying ? 'Off' : 'On'}`;
+  musicToggle.textContent = ♫ Music: ${isPlaying ? 'Off' : 'On'};
   isPlaying = !isPlaying;
 });
 
@@ -83,24 +83,12 @@ window.addEventListener('load', () => {
   setTimeout(() => whisper?.classList.add('opacity-100'), 3000);
 });
 
-// 🌌 Firefly Generator
-const fireflyContainer = document.getElementById('fireflies');
-if (fireflyContainer) {
-  for (let i = 0; i < 40; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'firefly';
-    dot.style.top = `${Math.random() * 100}vh`;
-    dot.style.left = `${Math.random() * 100}vw`;
-    dot.style.animationDuration = `${8 + Math.random() * 4}s`;
-    dot.style.width = dot.style.height = `${1 + Math.random() * 2}px`;
-    fireflyContainer.appendChild(dot);
-  }
-}
+  
 
 // 🌠 Parallax on Scroll
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
-  document.body.style.setProperty('--scroll', `${scrollY}px`);
+  document.body.style.setProperty('--scroll', ${scrollY}px);
   document.querySelectorAll('.parallax-gallery, #hero').forEach(el => {
     el.style.setProperty('--scroll', scrollY);
   });
@@ -129,7 +117,7 @@ if (canvas) {
     for (let p of particles) {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
+      ctx.fillStyle = rgba(255,255,255,${p.opacity});
       ctx.fill();
       p.y -= p.speedY;
       if (p.y < 0) p.y = canvas.height;
@@ -174,8 +162,8 @@ glow.id = 'cursor-glow';
 document.body.appendChild(glow);
 
 document.addEventListener('mousemove', e => {
-  glow.style.left = `${e.clientX}px`;
-  glow.style.top = `${e.clientY}px`;
+  glow.style.left = ${e.clientX}px;
+  glow.style.top = ${e.clientY}px;
 });
  window.addEventListener('DOMContentLoaded', () => {
   const loadingScreen = document.getElementById('loading-screen');
