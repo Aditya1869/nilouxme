@@ -359,7 +359,7 @@ section { box-shadow: none; border: none; }
   border-radius: 1rem;
   display: block;
 }
-@media (max-width: 768px) {
+@media (max-width: 768px) {}
   .scroll-track {
     flex-wrap: wrap;
     justify-content: center;
