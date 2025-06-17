@@ -395,9 +395,9 @@ section { box-shadow: none; border: none; }
   0% { transform: translateX(-50%); }
   100% { transform: translateX(0); }
 }
-.min-w-\[300px\], .min-w-\[200px\] {
+.image-wrapper {
+  min-width: 250px; /* or 200px, 300px — your call */
   position: relative;
-  width: 250px; /* or your preferred width */
 }
 #loading-screen {
   position: fixed;
