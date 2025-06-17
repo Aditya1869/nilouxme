@@ -128,7 +128,7 @@ a[href^="#"]:hover {
   }
 } /* <-- This was missing */
   #starlight .grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 3fr !important;
   }
   .social-btn, button {
     padding: 0.5rem 1rem;
