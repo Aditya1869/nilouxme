@@ -29,7 +29,7 @@ a, .btn, button, .clickable {
   overflow: hidden;
   display: inline-block;
   padding: 0.6rem 1.2rem;
-background: linear-gradient(120deg, rgba(0,200,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
+  background: linear-gradient(120deg, rgba(0,200,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   color: white;
@@ -42,6 +42,20 @@ background: linear-gradient(120deg, rgba(0,200,255,0.15) 0%, rgba(255,255,255,0.
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+@keyframes socialOverlayGlow {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(10deg) scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
 }
 .social-btn:hover, button:hover {
   background: rgba(255, 255, 255, 0.15);
@@ -123,33 +137,6 @@ a[href^="#"]:hover {
     font-size: 0.9rem;
   }
 }
-
-/* Fireflies */
- 
-
-/* Starfield */
-#starfield {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  background: transparent;
-  overflow: hidden;
-}
-.star {
-  position: absolute;
-  width: 2px; height: 2px;
-  background: white;
-  border-radius: 50%;
-  animation: twinkle 2s infinite ease-in-out;
-  opacity: 0.8;
-}
-@keyframes twinkle {
-  0%, 100% { opacity: 0.8; transform: scale(1); }
-  50% { opacity: 0.2; transform: scale(0.5); }
-}
-
 /* Parallax Hero */
 body::before {
   content: "";
@@ -359,11 +346,10 @@ hr { display: none; }
 section { box-shadow: none; border: none; }
 .auto-scroll-gallery {
   width: 100vw;
+  margin-left: calc(-50vw + 50%);
   overflow: hidden;
   padding: 2rem 0;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   flex-direction: column;
   gap: 2rem;
 }
@@ -380,26 +366,11 @@ section { box-shadow: none; border: none; }
 }
 .auto-scroll-gallery img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: fill;
   border-radius: 1rem;
-  display: block;
+  display: flex;
 }
-@media (max-width: 768px) {
-  .scroll-track {
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .scroll-track .image-wrapper {
-    flex: 0 1 45%;
-    max-width: 45%;
-    min-width: unset;
-    margin-bottom: 1rem;
-  }
-
- 
 
 @keyframes scrollGalleryLeft {
   0% { transform: translateX(0); }
@@ -411,7 +382,7 @@ section { box-shadow: none; border: none; }
 }
 .min-w-\[300px\], .min-w-\[200px\] {
   position: relative;
-  width: 250px; /* or your preferred width */
+  width: 300px; /* or your preferred width */
 }
 #loading-screen {
   position: fixed;
@@ -433,9 +404,7 @@ section { box-shadow: none; border: none; }
   object-fit: cover;
   z-index: 1;
 }
-.social-btn:hover, button:hover {
-  animation: socialOverlayGlow 2s ease-in-out infinite;
-}
+
 .loading-text {
   position: absolute;
   top: 55%;
@@ -481,23 +450,4 @@ section { box-shadow: none; border: none; }
   opacity: 0;
   pointer-events: none;
 }
-  
-@keyframes socialOverlayGlow {
-  0% {
-    transform: rotate(0deg) scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: rotate(10deg) scale(1.08);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(0deg) scale(1);
-    opacity: 0.7;
-  }
-}
-/* Pause scroll on hover */
-.auto-scroll-gallery .row1:hover,
-.auto-scroll-gallery .row2:hover {
-  animation-play-state: paused;
-}
+
